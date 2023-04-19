@@ -33,7 +33,7 @@ export default function NavHoverBox({ title, icon, description }) {
             >
                 <Icon as={icon} fontSize="3xl" mb={4} />
                 <Heading size="md" fontWeight="normal">{title}</Heading>
-                <Text>{description}</Text>
+                <Text >{description}</Text>
             </Flex>
         </>
     )

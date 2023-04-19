@@ -12,7 +12,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-
+import GridMain from "./Grid";
 
 
 const SpotifyHomepage = () => {
@@ -30,7 +30,7 @@ const SpotifyHomepage = () => {
           // borderColor="gray.200"
           bg="rgb(16,16,16)"
         >
-          <Box>
+          <Box >
             {/* <Image
               src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png"
               height="8"
