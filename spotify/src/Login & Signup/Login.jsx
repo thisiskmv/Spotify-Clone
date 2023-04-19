@@ -3,8 +3,10 @@ import {Img,Center,Box,Button, Divider,Input,Text,Flex,Checkbox,Spacer, Containe
 import {FaFacebook} from "react-icons/fa"
 import {AiFillApple} from "react-icons/ai"
 import {FcGoogle} from "react-icons/fc"
+import { useNavigate } from 'react-router-dom';
 import "./Login.css"
 function Login(props) {
+  let {navigate}=useNavigate();
     return (
         <div >
         <Box borderBottom="0.1px solid grey" w="100%" pb="1.5rem">
@@ -14,7 +16,7 @@ function Login(props) {
         </Box> 
         <div style={{margin:"auto",marginBottom:"5rem",width:"30rem"}}>
         <Center><p style={{marginTop:"15px"}}>To continue, log in to Spotify.</p></Center>
-
+        <div>
         <Box mb="1rem" mt="1rem">
         <Button bg="rgb(24,119,242)" w="30rem" p={6} borderRadius="5rem" colorScheme='facebook' leftIcon={<FaFacebook />}>
         CONTINUE WITH FACEBOOK
@@ -37,23 +39,23 @@ function Login(props) {
         </Box>
 
         
-        <p >OR</p>
+       <Center> <p >OR</p></Center>
         
 
 
 
-        <Text mb='8px' ml="-18rem">Email address or username</Text>
+        <Text mb='8px' >Email address or username</Text>
         <Input w="30rem" p="1.6rem" border="1px solid grey" focusBorderColor='black'
         placeholder='Email Address or Username'
         size='sm'
       />
-      <Text mb='8px' mt="0.8rem" ml="-26rem">Password</Text>
+      <Text mb='8px' mt="0.8rem" >Password</Text>
         <Input w="30rem" p="1.6rem" border="1px solid grey" focusBorderColor='black'
         placeholder='Password' type='password'
         size='sm'
 
       />
-      <Text mb='8px' mt="0.8rem" ml="-20rem">Forgot your password?</Text>
+      <Text mb='8px' mt="0.8rem" >Forgot your password?</Text>
 
       <Center >
       <Flex >
@@ -65,8 +67,7 @@ function Login(props) {
          Login
         </Button>
         </Box>
-        
-        
+                
       </Flex>
       </Center>
       <hr style={{ borderBottom:"1px solid grey",marginTop:"2rem"}} />
@@ -79,11 +80,7 @@ function Login(props) {
         </Button>
         </Box>
       </div>
-
-      
-
-        
-        
+      </div>  
         </div>
 
     );
