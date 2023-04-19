@@ -38,9 +38,9 @@ function SignUp(props) {
         
 
 
-       <div>
+       <div style={{marginTop:"2rem"}}>
         <p >What's your email?</p>
-        <Input w="30rem" p="1.6rem" border="1px solid grey" focusBorderColor='black'
+        <Input w="30rem" mt="0.8rem" p="1.6rem" border="1px solid grey" focusBorderColor='black'
         placeholder='Email Address or Username'
         size='sm'
       />
@@ -91,26 +91,30 @@ function SignUp(props) {
 What's your gender?</Text>
 
 <RadioGroup >
-      <Stack direction='row'>
+      <Stack direction='row' spacing={14}>
         <Radio >Male</Radio>
         <Radio >Female</Radio>
         <Radio>Non binary</Radio>
         <Radio>Others</Radio>
-        <Radio>Prefer not to say</Radio>
+      </Stack>
+    </RadioGroup>
+    <RadioGroup >
+      <Stack direction='row'>
+        <Radio mt="0.5rem">Prefer not to say</Radio>
       </Stack>
     </RadioGroup>
 
     <Box>
-    <Checkbox >I would prefer not to receive marketing messages from Spotify</Checkbox>
+    <Checkbox  mt="1rem">I would prefer not to receive marketing messages from Spotify</Checkbox>
     </Box>
     <Box>
-    <Checkbox >Share my registration data with Spotify's content providers for marketing purposes.</Checkbox>
+    <Checkbox ><p style={{marginTop:"1rem"}}>Share my registration data with Spotify's content providers for marketing purposes.</p></Checkbox>
     </Box>
    
     <Center>
-        <Box><p>By clicking on sign-up, you agree to Spotify's Terms and Conditions of Use.</p></Box></Center>
+        <p style={{fontSize:"0.6rem",marginTop:"1rem"}}>By clicking on sign-up, you agree to Spotify's Terms and Conditions of Use.</p></Center>
         <Center>
-       <Box> <p>To learn more about how Spotify collects, uses, shares and protects your personal data,please see Spotify's Privacy Policy</p></Box>
+      <p style={{fontSize:"0.6rem"}}>To learn more about how Spotify  shares and protects your personal  data,please see <span style={{color:"blue"}}>Spotify's Privacy Policy</span></p>
        </Center>
       
       <Center >

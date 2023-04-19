@@ -5,7 +5,7 @@ p:before{
     display: block;
     background: rgba(128, 128, 128, 0.055);
     position: absolute;
-    top: 32.8%;
+    top: 31.5%;
     left: 27.2rem;
 }
 p:after{
@@ -15,6 +15,6 @@ p:after{
     display: block;
     background: rgba(128, 128, 128, 0.055);
     position: absolute;
-    top: 32.8%;
+    top: 31.5%;
     right: 27.2rem;
 }
