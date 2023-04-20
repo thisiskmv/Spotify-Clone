@@ -36,3 +36,30 @@
     transform: rotate(360deg);
   }
 }
+
+.playlist-tr td{
+  border: 0px;
+  padding: 8px 12px;
+}
+
+.playlist-tr td:nth-child(2){
+  max-width: 415px;
+}
+
+.playlist-tr td:nth-child(3){
+  max-width: 276px;
+}
+
+.playlist-tr > tr{
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.playlist-tr > tr:hover{
+  background-color: hsla(0,0%,100%,.1);
+  color: white;
+}
+
+.whishlist-btn{
+  opacity: 0;
+}
+
