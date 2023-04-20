@@ -6,6 +6,13 @@ import { SpotifyHomepage } from "./Pages/Home";
 import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
 
+
+let token=useSelector((store)=>{
+  return store.token.toke
+})
+console.log(token)
+
+
 import Login from "./Login & Signup/Login";
 import SignUp from "./Login & Signup/SignUp";
 import AllRoutes from "./Routes/AllRoutes";
@@ -20,7 +27,36 @@ function App() {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('spotify_token')) || null);
   let dispatch = useDispatch();
 
+
  
+
+// if(token_timer === "0" || time!=token_timer || spotify_token == undefined || spotify_token == null){
+//   localStorage.setItem('token_timer', time)
+//   localStorage.removeItem("spotify_token");
+//   // refreshToken()
+//   console.log("Your new generated token is this", spotify_token)
+// }
+// store.subscribe(()=>{
+
+// })
+// useEffect(()=>{
+//   // if(Math.floor(( timer - spotify_time/1000/60))>59){
+//     
+//   // }else {
+  
+//   // }
+//   // 
+// },[])
+useEffect(()=>{
+  dispatch(thunkActionCreator("token"))
+  dispatch(thunkActionCreator("playlist"))
+},[])
+
+// let data=useSelector((store)=>{
+//   return store.data;
+// })
+// console.log(data)
+
 
   store.subscribe(() => {
     setToken(store.getState().token.toke);
@@ -53,6 +89,7 @@ function App() {
 
     }
   }, [token]);
+
 
   return (
     <div className="App">
