@@ -20,23 +20,26 @@ import {
   IconButton,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { SimpleGrid } from "@chakra-ui/react";
+import HeadGrid from "./SimpleGrid";
 import Footermain from "./Footermain";
 import { FaPlay } from "react-icons/fa";
 
 const GridMain = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const [isHovered, setIsHovered] = useState(null);
+  console.log(isHovered);
+  const handleMouseEnter = (value) => {
+    setIsHovered(value);
+    console.log(value)
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setIsHovered();
   };
   return (
     <>
       <Flex>
         <Box bg="rgb(29,29,29)">
+          <HeadGrid/>
           <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
             <Text color="white">Focus</Text>
           </Flex>
@@ -49,8 +52,10 @@ const GridMain = () => {
               boxShadow="sm"
               borderRadius={10}
               p={3}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              // _hover={{
+              //   bg:'rgb(22,22,22)'
+
+              // }}
             >
               <Stack spacing={3}>
                 <Center>
@@ -214,18 +219,48 @@ const GridMain = () => {
               boxShadow="sm"
               borderRadius={10}
               p={3}
+             
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}  
+              // bg={useColorModeValue('gray.100', 'rgb(22,22,22)')}
+              onMouseEnter={()=>handleMouseEnter('1')}
+              onMouseLeave={handleMouseLeave}
+            
+              >
                 <Center>
+                  <Box>
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
                     src="https://i.scdn.co/image/ab67706f0000000383829f7cdd2443271b6a6ec2"
                     alt="hot hits"
                     borderRadius={10}
+                    
                   />
+                      <IconButton
+                  position="absolute"
+                  // top="50%"
+                  // left="5px"
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  borderRadius={30}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  // _hover={{opacity:0}}
+                  opacity={isHovered=='1' ? 1 : 0}
+                  // transition="opacity 0.2s"
+                  // visibility={isHovered ? "visible" : "hidden"}
+                />
+                  </Box>
+                
+                
                 </Center>
-
+              
+               
                 <Text as="b" color="white">
                   Todays Top Hits
                 </Text>
@@ -242,8 +277,12 @@ const GridMain = () => {
               borderRadius={10}
               p={3}
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}
+               onMouseEnter={()=>handleMouseEnter('2')}
+               onMouseLeave={handleMouseLeave}
+              >
                 <Center>
+                  <Box>
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
@@ -251,7 +290,23 @@ const GridMain = () => {
                     alt="hot hits"
                     borderRadius={10}
                   />
+                    <IconButton
+                  position="absolute"
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  borderRadius={30}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  opacity={isHovered=='2' ? 1 : 0}
+                />
+
+                  </Box>
                 </Center>
+              
                 <Text as="b" color="white">
                   RapCaviar
                 </Text>
@@ -268,8 +323,12 @@ const GridMain = () => {
               borderRadius={10}
               p={3}
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}
+               onMouseEnter={()=>handleMouseEnter('3')}
+               onMouseLeave={handleMouseLeave}
+              >
                 <Center>
+                  <Box>
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
@@ -277,6 +336,20 @@ const GridMain = () => {
                     alt="hot hits"
                     borderRadius={10}
                   />
+                      <IconButton
+                  position="absolute"
+                  borderRadius={30}
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  opacity={isHovered=='3' ? 1 : 0}
+                />
+</Box>
                 </Center>
                 <Text as="b" color="white">
                   All Out 2010s
@@ -294,8 +367,13 @@ const GridMain = () => {
               borderRadius={10}
               p={3}
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}
+               onMouseEnter={()=>handleMouseEnter('4')}
+               onMouseLeave={handleMouseLeave}
+              >
+               
                 <Center>
+                <Box>
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
@@ -303,7 +381,27 @@ const GridMain = () => {
                     alt="hot hits"
                     borderRadius={10}
                   />
+                       <IconButton
+                  position="absolute"
+                  // top="50%"
+                  // left="5px"
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  borderRadius={30}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  // _hover={{opacity:0}}
+                  opacity={isHovered=='4' ? 1 : 0}
+                  // transition="opacity 0.2s"
+                  // visibility={isHovered ? "visible" : "hidden"}
+                />
+              </Box >
                 </Center>
+               
                 <Text as="b" color="white">
                   Rock Classics
                 </Text>
@@ -316,12 +414,18 @@ const GridMain = () => {
             <GridItem
               w="100%"
               bg="rgb(22,22,22)"
+              
               boxShadow="sm"
               borderRadius={10}
               p={3}
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}
+                onMouseEnter={()=>handleMouseEnter('5')}
+                onMouseLeave={handleMouseLeave}>
                 <Center>
+                  <Box>
+
+                 
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
@@ -329,6 +433,20 @@ const GridMain = () => {
                     alt="hot hits"
                     borderRadius={10}
                   />
+                  <IconButton
+                  position="absolute"
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  borderRadius={30}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  opacity={isHovered=='5' ? 1 : 0}
+                />
+                 </Box>
                 </Center>
                 <Text as="b" color="white">
                   Chill Hits
@@ -346,8 +464,12 @@ const GridMain = () => {
               borderRadius={10}
               p={3}
             >
-              <Stack spacing={3}>
+              <Stack spacing={3}
+              onMouseEnter={()=>handleMouseEnter('6')}
+              onMouseLeave={handleMouseLeave}>
+              
                 <Center>
+                  <Box>
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
@@ -355,6 +477,20 @@ const GridMain = () => {
                     alt="hot hits"
                     borderRadius={10}
                   />
+                   <IconButton
+                  position="absolute"
+                  transform="translate(40px, -55px)"
+                  mb={10}
+                  borderRadius={30}
+                  variant="ghost"
+                  aria-label="Play"
+                  color='black'
+                  bg='green'
+                  icon={<FaPlay />}
+                  size="lg"
+                  opacity={isHovered=='6' ? 1 : 0}
+                />
+                </Box>
                 </Center>
                 <Text as="b" color="white">
                   Mega Hit Mix

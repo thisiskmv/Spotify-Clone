@@ -1,4 +1,5 @@
-import React,{ useState } from "react";
+import { useState, useEffect } from "react";
+import {useSelector} from 'react-redux';
 import {
   Center,
   Card,
@@ -21,18 +22,25 @@ import {
 } from "@chakra-ui/react";
 
 const HeadGrid=()=>{
-    return <>
-    <Grid
-  h='200px'
-  templateRows='repeat(2, 1fr)'
-  templateColumns='repeat(5, 1fr)'
-  gap={4}
->
-  <GridItem rowSpan={2} colSpan={1} bg='tomato' />
-  <GridItem colSpan={2} bg='papayawhip' />
-  <GridItem colSpan={2} bg='papayawhip' />
-  <GridItem colSpan={2} bg='tomato' />
-</Grid>
+  // let data=useSelector((store)=>{
+  //   return store.
+  // })
+  const numRows = 2;
+  const numCols = 3;
+
+  // Slice the array to only include the first (numRows * numCols) playlists
+  // const limitedPlaylists = playlists.slice(0, numRows * numCols);
+   
+   
+   return <>
+ <Box w='200px'>
+
+</Box>
+<Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
+
+            <Text color="white">Good Morning</Text>
+          </Flex>
+        
     </>
 }
 
