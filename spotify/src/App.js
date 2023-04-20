@@ -21,6 +21,11 @@ let spotify_time=useSelector((store)=>{
 })
 // console.log(spotify_time)
 
+let token=useSelector((store)=>{
+  return store.token.toke
+})
+console.log(token)
+
 
   
 // let token_timer = localStorage.getItem('token_timer',"time")||0
@@ -48,7 +53,7 @@ let spotify_time=useSelector((store)=>{
 // },[])
 useEffect(()=>{
   dispatch(thunkActionCreator("token"))
-  dispatch(thunkActionCreator("searchResults"))
+  dispatch(thunkActionCreator("playlist"))
 },[])
 
 // let data=useSelector((store)=>{

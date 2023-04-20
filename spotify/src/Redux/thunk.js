@@ -5,7 +5,7 @@ import { getAlbum } from "./action";
 import { CategoryPlaylists } from "./action";
 import { getSearchResults } from "./action";
 let client_id= 'd49a92ae8bd040d18dc326af31826688';
-let TOKEN='BQChE0QZWhBrlSnz-N8z1aa7ci9GWMZUwmbzC-0a5LMfSThYtYUfzzL-AtMzURjAsz0ivcPg6yJJE9zTyyR5e5RL_jd9KM0H698two2XOpe8-IwKH3HP'
+let TOKEN='BQCwAR_NSn5g93_e5_gCafSjdfODt-747g5F6cUNazGFa3KG83CZ_9c5LYZt1DpYcm4SHUZQtNGWcOCfaf-_3zG1E6-26ol5w2XJ3edTBU_b7k0E3p2e'
 let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
@@ -52,7 +52,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             );
             let data = await response.json();
             dispatch(Playlists(data))
-            // console.log(data);
+            console.log(data);
             // return data.playlists.items; 
           }
         //  track................................................
