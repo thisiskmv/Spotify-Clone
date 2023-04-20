@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import {
   Center,
   Card,
@@ -24,9 +24,18 @@ import {
 import HeadGrid from "./SimpleGrid";
 import Footermain from "./Footermain";
 import { FaPlay } from "react-icons/fa";
+import { MyContext } from "../Components/context";
 
 const GridMain = () => {
   const [isHovered, setIsHovered] = useState(null);
+  const { myState, toggle } = useContext(MyContext);
+
+  console.log("from grid",myState);
+ 
+  const handleOnChange = () => {
+    toggle();
+  };
+
   // console.log(isHovered);
   const handleMouseEnter = (value) => {
     setIsHovered(value);
@@ -38,16 +47,23 @@ const GridMain = () => {
   };
   return (
     <>
-      <Flex>
+      <Flex bg='rgb(29,29,29)'>
+      <Flex position='static'  h='100%'left={0}
+           flexDir="column"
+           w={myState ?'350px':'175px'}
+      top={0}  bg='rgb(29,29,29)'
+      display={myState ? 'none':''}
+      ></Flex>
         <Box bg="rgb(29,29,29)">
           <HeadGrid />
-          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
+         
+          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Focus</Text>
           </Flex>
 
-          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
-            <GridItem w="200px" rowSpan={10} colSpan={1} bg="tomato" />
-            <GridItem
+          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" >
+            <GridItem  w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato"  />
+           <GridItem
               w="100%"
               bg="rgb(22,22,22)"
               boxShadow="sm"
@@ -349,11 +365,11 @@ const GridMain = () => {
             </GridItem>
           </Grid>
 
-          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
+          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Spotify Playlists</Text>
           </Flex>
           <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
-            <GridItem w="200px" rowSpan={10} colSpan={1} bg="tomato" />
+            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
             <GridItem
               w="100%"
               bg="rgb(22,22,22)"
@@ -676,11 +692,11 @@ const GridMain = () => {
             </GridItem>
           </Grid>
 
-          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
+          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Sound of India</Text>
           </Flex>
           <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
-            <GridItem w="200px" rowSpan={10} colSpan={1} bg="tomato" />
+            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
             <GridItem
               w="100%"
               bg="rgb(22,22,22)"

@@ -24,14 +24,14 @@ import {
   FiBriefcase,
   FiSettings,
 } from "react-icons/fi";
-import { IoPawOutline } from "react-icons/io5";
+import { VscLibrary } from "react-icons/vsc";
 import { MyContext } from "./context";
 
 import NavItem from "./item";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
   
   const { myState, toggle } = useContext(MyContext);
 
@@ -70,6 +70,8 @@ export default function Sidebar() {
             display={myState ? "block":"none"}
           />
         </Box>
+        {/* <BiLibrary/> */}
+     
         <IconButton
           background="none"
           mt={5}
@@ -89,7 +91,9 @@ export default function Sidebar() {
           title="Home"
           description="This is the description for the dashboard."
         />
+     
         <NavItem navSize={navSize} icon={SearchIcon} title="Search" />
+        <NavItem navSize={navSize} icon={VscLibrary} title="Your Library"/>
 
         {/* <HStack>
           <FiHome color="'white"/>
