@@ -8,10 +8,6 @@ import { SpotifyHomepage } from './Pages/Home';
 function App() {
   return (
     <div className="App">
-    
-     
-     
-     
       <SpotifyHomepage/>
     </div>
   );
