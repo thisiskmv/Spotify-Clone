@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
+  useBoolean,
   Flex,
   Text,
   IconButton,
@@ -24,11 +25,22 @@ import {
   FiSettings,
 } from "react-icons/fi";
 import { IoPawOutline } from "react-icons/io5";
+import { MyContext } from "./context";
+
 import NavItem from "./item";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const [isOpen, setIsOpen] = useState(true);
+  
+  const { myState, toggle } = useContext(MyContext);
+
+  console.log("from side",myState);
+ 
+  const handleOnChange = () => {
+    toggle();
+  };
+ 
 
 
   return (
@@ -55,16 +67,19 @@ export default function Sidebar() {
           <Image
             src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png"
             height="10"
+            display={myState ? "block":"none"}
           />
         </Box>
         <IconButton
           background="none"
           mt={5}
           _hover={{ background: "none" }}
+          color='white'
           icon={<FiMenu />}
           onClick={() => {
             if (navSize == "small") changeNavSize("large");
             else changeNavSize("small");
+            handleOnChange();
           }}
         />
         <NavItem

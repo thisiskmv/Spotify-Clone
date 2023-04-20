@@ -679,7 +679,7 @@ const GridMain = () => {
           <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
             <Text color="white">Sound of India</Text>
           </Flex>
-          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
+          <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
             <GridItem w="200px" rowSpan={10} colSpan={1} bg="tomato" />
             <GridItem
               w="100%"

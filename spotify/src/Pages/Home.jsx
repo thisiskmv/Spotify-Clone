@@ -25,8 +25,6 @@ const SpotifyHomepage = () => {
           alignItems="center"
           justify="space-between"
           p="4"
-          // borderBottom="1px"
-          // borderColor="gray.200"
           bg="rgb(16,16,16)"
         >
           <Box >
@@ -46,7 +44,7 @@ const SpotifyHomepage = () => {
             </ButtonGroup>
           </Box>
         </Flex>
- </Box>
+      </Box>
       <GridMain/>
     </>
   );

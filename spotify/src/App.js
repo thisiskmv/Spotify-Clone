@@ -11,7 +11,14 @@ import {useDispatch, useSelector} from "react-redux"
 import { useEffect,useState } from 'react';
 import store from "./Redux/store"
 import getData from './Redux/thunk';
+import { MyContext } from './Components/context';
+
 function App() {
+  const [myState, setMyState] = useState(true);
+
+  const toggle =()=>{
+    setMyState((prev)=>!prev);
+  }
 
 let timer=Date.now();
 let dispatch=useDispatch();
@@ -42,6 +49,7 @@ useEffect(()=>{
 
 
   return (
+    <MyContext.Provider value={{myState, toggle}}>
     <div className="App">
       {/* <Login/>  */}
       {/* <SignUp/>  */}
@@ -49,7 +57,9 @@ useEffect(()=>{
       {/* <AllRoutes/> */}
       
       <SpotifyHomepage/>
+      
     </div>
+    </MyContext.Provider>
   );
 }
 
