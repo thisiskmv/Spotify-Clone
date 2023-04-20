@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 import Sidebar from "../Components/side";
 import {
   Box,
@@ -16,12 +16,11 @@ import GridMain from "./Grid";
 
 
 const SpotifyHomepage = () => {
+ 
   return (
     <>
      <Box>
-     
         <Sidebar/>
-      
         <Flex
           alignItems="center"
           justify="space-between"
@@ -47,10 +46,8 @@ const SpotifyHomepage = () => {
             </ButtonGroup>
           </Box>
         </Flex>
-
-       
-        
-      </Box>
+ </Box>
+      <GridMain/>
     </>
   );
 };
