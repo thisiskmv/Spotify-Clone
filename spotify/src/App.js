@@ -28,6 +28,7 @@ console.log(data)
       {/* <Navbar/> */}
       {/* <AllRoutes/> */}
       
+      <SpotifyHomepage/>
     </div>
   );
 }
