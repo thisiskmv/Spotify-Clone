@@ -13,9 +13,12 @@ let initial={
 let reducer=(state=initial,action)=>{
     switch(action.type){
         case 'playlist':
-            return {...state,playlists: action.payload}
+            return {...state,getPlaylists: action.payload}
         case 'token':
             return {...state,token: {toke: action.payload,time:new Date().getTime()}}
+        case 'oldToken':
+             return {...state,token :{toke:action.payload.token, time:action.payload.timestamp}}
+
         case 'track':
             return {...state,track: action.payload}
         case 'album':
