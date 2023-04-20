@@ -5,18 +5,19 @@ import { getAlbum } from "./action";
 import { CategoryPlaylists } from "./action";
 import { getSearchResults } from "./action";
 let client_id= 'd49a92ae8bd040d18dc326af31826688';
-let TOKEN='BQChE0QZWhBrlSnz-N8z1aa7ci9GWMZUwmbzC-0a5LMfSThYtYUfzzL-AtMzURjAsz0ivcPg6yJJE9zTyyR5e5RL_jd9KM0H698two2XOpe8-IwKH3HP'
+// let TOKEN='BQChE0QZWhBrlSnz-N8z1aa7ci9GWMZUwmbzC-0a5LMfSThYtYUfzzL-AtMzURjAsz0ivcPg6yJJE9zTyyR5e5RL_jd9KM0H698two2XOpe8-IwKH3HP'
 let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
 
 
- function thunkActionCreator(method) {
+ function thunkActionCreator(method,TOKEN) {
     return (dispatch)=>{
 
       // token..................................................
         const getData = async (dispatch) => {
+          console.log("refresh token called")
             let data = await fetch(`https://accounts.spotify.com/api/token`, {
               method: "POST",
               headers: {
@@ -28,9 +29,14 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           
             let token = await data.json();
             dispatch(getToken(token.access_token))
-            // localStorage.setItem("spotify_token",JSON.stringify(token.access_token));
+            // spotify_token
+            localStorage.setItem("spotify_token",JSON.stringify({token:token.access_token,timestamp:Date.now()}));
             // console.log("====>", token);
           };
+
+          const storeOldToken  =(tokenData)=>{
+              dispatch({type:"oldToken",payload:tokenData})
+          }
         
           // async function refreshToken() {
           //   let newToken = await getData();
@@ -41,18 +47,27 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
           // playlists////////////////////////////////////
           async function getPlaylists(category, limit, TOKEN) {
-            let response = await fetch(
-              `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${TOKEN}`,
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            let data = await response.json();
-            dispatch(Playlists(data))
-            // console.log(data);
+            
+            try {
+
+              let response = await fetch(
+                `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${TOKEN}`,
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+              let data = await response.json();
+              dispatch(Playlists(data.playlists.items))
+              // console.log(data);
+              
+            } catch (error) {
+              console.log(error)
+            }
+
+           
             // return data.playlists.items; 
           }
         //  track................................................
