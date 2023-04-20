@@ -1,0 +1,20 @@
+p:before{
+    content: "";
+    width: 13rem;
+    height: 2px;
+    display: block;
+    background: rgba(128, 128, 128, 0.055);
+    position: absolute;
+    top: 31.5%;
+    left: 27.2rem;
+}
+p:after{
+    content: "";
+    width: 13rem;
+    height: 2px;
+    display: block;
+    background: rgba(128, 128, 128, 0.055);
+    position: absolute;
+    top: 31.5%;
+    right: 27.2rem;
+}
