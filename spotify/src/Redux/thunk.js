@@ -5,7 +5,7 @@ import { getAlbum } from "./action";
 import { CategoryPlaylists } from "./action";
 import { getSearchResults } from "./action";
 let client_id= 'd49a92ae8bd040d18dc326af31826688';
-let TOKEN='BQChE0QZWhBrlSnz-N8z1aa7ci9GWMZUwmbzC-0a5LMfSThYtYUfzzL-AtMzURjAsz0ivcPg6yJJE9zTyyR5e5RL_jd9KM0H698two2XOpe8-IwKH3HP'
+let TOKEN='BQBg3AoKcvuOBRQBQcEEks_0qRk2PiFcOevY4YPmxMfmNAAmel3LS62nZc-o6pmi2PT34f3fkurJrjO136GjzN9qjlWlgdcqfd7NlPwkmb9nd-ux_Ycm'
 let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
@@ -13,6 +13,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
  function thunkActionCreator(method) {
+
     return (dispatch)=>{
 
       // token..................................................
@@ -102,7 +103,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             );
             let data = await response.json();
             dispatch(getSearchResults(data))
-            console.log(data)
+            // console.log(data)
             // return data;
           }
            
@@ -133,6 +134,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
             getPlaylists('rock','12',TOKEN)
+            getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
             getAllSearchResults("punjabi","track,artist",25,TOKEN)

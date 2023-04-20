@@ -8,53 +8,38 @@ import AllRoutes from './Routes/AllRoutes';
 import Navbar from './Routes/Navbar';
 import thunkActionCreator from './Redux/thunk';
 import {useDispatch, useSelector} from "react-redux"
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import store from "./Redux/store"
 import getData from './Redux/thunk';
 function App() {
 
 let timer=Date.now();
 let dispatch=useDispatch();
-// var spotify_token = JSON.parse(localStorage.getItem('spotify_token'))
+
+const [token,setToken]=useState(
+  useSelector((store)=>{
+  return store.token.toke
+}));
+
+store.subscribe(()=>{
+
+  setToken(store.getState().token.toke)
+})
+// console.log(token);
+
+if(token){
+  // dispatch(thunkActionCreator("playlist"))
+}
+
 let spotify_time=useSelector((store)=>{
   return store.token.time
 })
-// console.log(spotify_time)
 
-
-  
-// let token_timer = localStorage.getItem('token_timer',"time")||0
- 
-// setInterval(function(){
-//   time = today.toTimeString()[0]+today.toTimeString()[1];
-// },3000)
- 
-// if(token_timer === "0" || time!=token_timer || spotify_token == undefined || spotify_token == null){
-//   localStorage.setItem('token_timer', time)
-//   localStorage.removeItem("spotify_token");
-//   // refreshToken()
-//   console.log("Your new generated token is this", spotify_token)
-// }
-// store.subscribe(()=>{
-
-// })
-// useEffect(()=>{
-//   // if(Math.floor(( timer - spotify_time/1000/60))>59){
-//     
-//   // }else {
-  
-//   // }
-//   // 
-// },[])
 useEffect(()=>{
   dispatch(thunkActionCreator("token"))
-  dispatch(thunkActionCreator("searchResults"))
+  // dispatch(thunkActionCreator("playlist"))
 },[])
 
-// let data=useSelector((store)=>{
-//   return store.data;
-// })
-// console.log(data)
 
   return (
     <div className="App">

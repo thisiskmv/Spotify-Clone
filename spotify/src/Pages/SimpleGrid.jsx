@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {useSelector} from 'react-redux';
+import store from "../Redux/store";
 import {
   Center,
   Card,
@@ -22,9 +23,12 @@ import {
 } from "@chakra-ui/react";
 
 const HeadGrid=()=>{
-  // let data=useSelector((store)=>{
-  //   return store.
-  // })
+  let data=useSelector((store)=>{
+    return store.getPlaylists
+    
+  })
+  
+  // console.log("this data ",data);
   const numRows = 2;
   const numCols = 3;
 
