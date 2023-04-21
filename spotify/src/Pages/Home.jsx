@@ -13,6 +13,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import GridMain from "./Grid";
+import Player from "./Player";
 
 
 const SpotifyHomepage = () => {
@@ -46,6 +47,7 @@ const SpotifyHomepage = () => {
         </Flex>
       </Box>
       <GridMain/>
+      <Player/>
     </>
   );
 };
