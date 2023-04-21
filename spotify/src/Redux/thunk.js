@@ -104,8 +104,13 @@ console.log(query)
               }
             );
             let data = await response.json();
+
             dispatch(getSearchResults(data.tracks.items))
             // console.log(data.artists,data.tracks)
+
+            dispatch(getSearchResults(data))
+            // console.log(data)
+
             // return data;
           }
            
@@ -153,6 +158,7 @@ console.log(query)
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
             getPlaylists('rock','12',TOKEN)
+            getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query)

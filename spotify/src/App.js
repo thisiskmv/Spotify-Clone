@@ -16,16 +16,70 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import store from "./Redux/store";
 import getData from "./Redux/thunk";
+
 import SearchPage from "./Search/SearchPage";
+
+import { MyContext } from './Components/context';
+
 function App() {
+ 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('spotify_token')) || null);
   let dispatch = useDispatch();
+
   let [query,setQuery] = useState("");
   let [debouncedText]=useDebounce(query,1000);
   // console.log(query);
 //  localStorage.setItem("song",query);
 //  let query1=localStorage.getItem("song")
   useEffect(() => { 
+
+
+  const [myState, setMyState] = useState(true);
+
+  // let token=useSelector((store)=>{
+  //   return store.token.toke
+  // })
+  // console.log(token)
+
+  const toggle =()=>{
+    setMyState((prev)=>!prev);
+  }
+
+  
+
+
+ 
+
+// if(token_timer === "0" || time!=token_timer || spotify_token == undefined || spotify_token == null){
+//   localStorage.setItem('token_timer', time)
+//   localStorage.removeItem("spotify_token");
+//   // refreshToken()
+//   console.log("Your new generated token is this", spotify_token)
+// }
+// store.subscribe(()=>{
+
+// })
+// useEffect(()=>{
+//   // if(Math.floor(( timer - spotify_time/1000/60))>59){
+//     
+//   // }else {
+  
+//   // }
+//   // 
+// },[])
+useEffect(()=>{
+  dispatch(thunkActionCreator("token"))
+  dispatch(thunkActionCreator("playlist"))
+},[])
+
+
+
+  store.subscribe(() => {
+    setToken(store.getState().token.toke);
+  });
+
+  useEffect(() => {
+
     
     if (token != null) {
       let tokenTime =JSON.parse(localStorage.getItem('spotify_token')).timestamp
@@ -60,6 +114,7 @@ function App() {
   }, [token,debouncedText]);
 
   return (
+    <MyContext.Provider value={{myState, toggle}}>
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
       {/* <DetailsPage /> */}
@@ -69,9 +124,17 @@ function App() {
       {/* <SignUp/>  */}
       {/* <Navbar/> */}
       {/* <AllRoutes/> */}
+
      <SearchPage action={setQuery} debounce={debouncedText}/>
+
+      
+      <SpotifyHomepage/>
+      
+
+
       {/* <SpotifyHomepage/> */}
     </div>
+    </MyContext.Provider>
   );
 }
 
