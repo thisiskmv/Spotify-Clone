@@ -1,5 +1,6 @@
 import { Box, Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react';
 import { BsFillVolumeUpFill, BsFillVolumeMuteFill } from 'react-icons/bs';
+
 import { useState } from 'react';
 
 const SpotifySlider = () => {
@@ -10,8 +11,8 @@ const SpotifySlider = () => {
   };
 
   return (
-    <Box display="flex" alignItems="center" width='300px'>
-      <BsFillVolumeMuteFill />
+    <Box display="flex" alignItems="center" w={'100px'}>
+      <BsFillVolumeMuteFill color='white' boxSize={10} />
       <Slider
         defaultValue={50}
         value={volume}
@@ -25,9 +26,9 @@ const SpotifySlider = () => {
         <SliderTrack>
           <SliderFilledTrack />
         </SliderTrack>
-        <SliderThumb boxSize={6} />
+        <SliderThumb boxSize={1} />
       </Slider>
-      <BsFillVolumeUpFill />
+      {/* <BsFillVolumeUpFill /> */}
     </Box>
   );
 };
