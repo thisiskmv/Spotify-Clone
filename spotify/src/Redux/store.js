@@ -4,8 +4,8 @@ import { applyMiddleware } from "redux"
 import reducer from "./Reducer";
 let store= myStore(reducer,applyMiddleware(thunk));
 
-store.subscribe(()=>{
-    console.log("store==>",store.getState())
-})
+// store.subscribe(()=>{
+//     console.log("store==>",store.getState())
+// })
 
 export default store;
