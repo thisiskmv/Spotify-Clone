@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {useSelector} from 'react-redux';
+import store from "../Redux/store";
 import {
   Center,
   Card,
@@ -20,11 +21,17 @@ import {
   Heading,
   SimpleGrid
 } from "@chakra-ui/react";
+import { MyContext } from "../Components/context";
 
 const HeadGrid=()=>{
-  // let data=useSelector((store)=>{
-  //   return store.
-  // })
+  const { myState, toggle } = useContext(MyContext);
+
+  let data=useSelector((store)=>{
+    return store.getPlaylists
+    
+  })
+  
+  // console.log("this data ",data);
   const numRows = 2;
   const numCols = 3;
 
@@ -36,7 +43,7 @@ const HeadGrid=()=>{
  <Box w='200px'>
 
 </Box>
-<Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml="240px" p={3}>
+<Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
 
             <Text color="white">Good Morning</Text>
           </Flex>

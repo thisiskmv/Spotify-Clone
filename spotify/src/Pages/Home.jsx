@@ -2,6 +2,7 @@ import React,{ useState } from "react";
 import Sidebar from "../Components/side";
 import {
   Box,
+  Avatar,
   Flex,
   Image,
   Button,
@@ -13,9 +14,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import GridMain from "./Grid";
+import Player from "./Player";
 
 
 const SpotifyHomepage = () => {
+  const Loggedin=true;
  
   return (
     <>
@@ -25,8 +28,6 @@ const SpotifyHomepage = () => {
           alignItems="center"
           justify="space-between"
           p="4"
-          // borderBottom="1px"
-          // borderColor="gray.200"
           bg="rgb(16,16,16)"
         >
           <Box >
@@ -37,6 +38,8 @@ const SpotifyHomepage = () => {
           </Box>
           <Box>
             <ButtonGroup spacing={2}>
+           
+            {/* <Avatar size='md' name='Dan Abrahmov' src='https://bit.ly/dan-abramov' /> */}
               <Button colorScheme="black" color="white" mr="2">
                 Sign Up
               </Button>
@@ -46,8 +49,9 @@ const SpotifyHomepage = () => {
             </ButtonGroup>
           </Box>
         </Flex>
- </Box>
+      </Box>
       <GridMain/>
+      {/* <Player/> */}
     </>
   );
 };
