@@ -28,52 +28,18 @@ function App() {
 
   let [query,setQuery] = useState("");
   let [debouncedText]=useDebounce(query,1000);
-  // console.log(query);
-//  localStorage.setItem("song",query);
-//  let query1=localStorage.getItem("song")
-  useEffect(() => { 
+
+
 
 
   const [myState, setMyState] = useState(true);
 
-  // let token=useSelector((store)=>{
-  //   return store.token.toke
-  // })
-  // console.log(token)
-
+ 
   const toggle =()=>{
     setMyState((prev)=>!prev);
   }
 
-  
-
-
  
-
-// if(token_timer === "0" || time!=token_timer || spotify_token == undefined || spotify_token == null){
-//   localStorage.setItem('token_timer', time)
-//   localStorage.removeItem("spotify_token");
-//   // refreshToken()
-//   console.log("Your new generated token is this", spotify_token)
-// }
-// store.subscribe(()=>{
-
-// })
-// useEffect(()=>{
-//   // if(Math.floor(( timer - spotify_time/1000/60))>59){
-//     
-//   // }else {
-  
-//   // }
-//   // 
-// },[])
-useEffect(()=>{
-  dispatch(thunkActionCreator("token"))
-  dispatch(thunkActionCreator("playlist"))
-},[])
-
-
-
   store.subscribe(() => {
     if(token==null){
 
