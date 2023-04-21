@@ -31,7 +31,7 @@ console.log(data2)
           w="88.2%"
           marginLeft="11.8%"
          
-          marginTop="-5.6rem"
+          marginTop="-7rem"
         >
             
          
@@ -62,7 +62,7 @@ console.log(data2)
         <div >
       
              {
-              (debounce.length==0) ? <div style={{display:"grid",gridTemplateColumns:"repeat(6,1fr)",gap:"10px",width:"88%" ,margin:"5px",marginLeft:"12%",marginTop:"5.6rem",marginBottom:"10px"}}>
+              (debounce.length==0) ? <div style={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:"30px",width:"84%" ,margin:"15px",marginLeft:"14%",marginTop:"7rem",marginBottom:"10px"}}>
                 {
                 data.map((elm,i)=>{
                     return <div key={i}>
@@ -80,13 +80,13 @@ console.log(data2)
                 })
             }
               </div> : <div>
-                {
+              {/* {
                   data2.map((elm,i)=>{
                     return <div>
                       <p>{elm.name}</p>
                     </div>
                   })
-                }
+                } */}
               </div>
              }
           

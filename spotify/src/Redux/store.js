@@ -9,9 +9,9 @@ let store= myStore(reducer,applyMiddleware(thunk));
 //     console.log("store==>",store.getState())
 // })
 
-store.subscribe(()=>{
-  console.log("store==>",store.getState())
-})
+// store.subscribe(()=>{
+//   console.log("store==>",store.getState())
+// })
 
 
 export default store;
