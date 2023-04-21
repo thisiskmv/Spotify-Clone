@@ -2,6 +2,7 @@ import React,{ useState } from "react";
 import Sidebar from "../Components/side";
 import {
   Box,
+  Avatar,
   Flex,
   Image,
   Button,
@@ -17,6 +18,7 @@ import Player from "./Player";
 
 
 const SpotifyHomepage = () => {
+  const Loggedin=true;
  
   return (
     <>
@@ -36,6 +38,8 @@ const SpotifyHomepage = () => {
           </Box>
           <Box>
             <ButtonGroup spacing={2}>
+           
+            {/* <Avatar size='md' name='Dan Abrahmov' src='https://bit.ly/dan-abramov' /> */}
               <Button colorScheme="black" color="white" mr="2">
                 Sign Up
               </Button>
@@ -47,7 +51,7 @@ const SpotifyHomepage = () => {
         </Flex>
       </Box>
       <GridMain/>
-      <Player/>
+      {/* <Player/> */}
     </>
   );
 };

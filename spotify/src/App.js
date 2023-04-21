@@ -7,10 +7,6 @@ import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
 
 
-let token=useSelector((store)=>{
-  return store.token.toke
-})
-console.log(token)
 
 
 import Login from "./Login & Signup/Login";
@@ -22,10 +18,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import store from "./Redux/store";
 import getData from "./Redux/thunk";
+import { MyContext } from './Components/context';
 
 function App() {
+ 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('spotify_token')) || null);
   let dispatch = useDispatch();
+
+  const [myState, setMyState] = useState(true);
+
+  // let token=useSelector((store)=>{
+  //   return store.token.toke
+  // })
+  // console.log(token)
+
+  const toggle =()=>{
+    setMyState((prev)=>!prev);
+  }
+
+  
 
 
  
@@ -91,7 +102,7 @@ useEffect(()=>{
     <MyContext.Provider value={{myState, toggle}}>
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
-      <DetailsPage />
+      {/* <DetailsPage /> */}
       {/* <LikePage/> */}
 
       {/* <Login/>  */}
