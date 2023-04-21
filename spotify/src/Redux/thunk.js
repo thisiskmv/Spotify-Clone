@@ -135,7 +135,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             );
             let data = await response.json();
             dispatch(getSearchResults(data))
-            console.log(data)
+            // console.log(data)
             // return data;
           }
            
@@ -166,6 +166,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
             getPlaylists('rock','12',TOKEN)
+            getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
             getAllSearchResults("punjabi","track,artist",25,TOKEN)
