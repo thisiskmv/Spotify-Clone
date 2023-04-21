@@ -6,7 +6,7 @@ let initial={
     getPlaylists:[],
     getTrack:[],
     getAlbumTrack:[],
-    SearchResults:[],
+    searchResults:[],
     CategoryPlaylists:[]
 }
 
@@ -23,9 +23,9 @@ let reducer=(state=initial,action)=>{
             return {...state,track: action.payload}
         case 'album':
             return {...state,album: action.payload}
-        case 'searchResults':
+        case 'search':
             return {...state,searchResults: action.payload}
-        case 'CategoryPlaylists':
+        case 'categoryPlay':
             return {...state,CategoryPlaylists: action.payload}
         default: return state;                        
     }

@@ -6,24 +6,33 @@ import { SpotifyHomepage } from "./Pages/Home";
 import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
 
-
-
-
 import Login from "./Login & Signup/Login";
 import SignUp from "./Login & Signup/SignUp";
 import AllRoutes from "./Routes/AllRoutes";
 import Navbar from "./Routes/Navbar";
 import thunkActionCreator from "./Redux/thunk";
+import {useDebounce} from "use-debounce";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import store from "./Redux/store";
 import getData from "./Redux/thunk";
+
+import SearchPage from "./Search/SearchPage";
+
 import { MyContext } from './Components/context';
 
 function App() {
  
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('spotify_token')) || null);
   let dispatch = useDispatch();
+
+  let [query,setQuery] = useState("");
+  let [debouncedText]=useDebounce(query,1000);
+  // console.log(query);
+//  localStorage.setItem("song",query);
+//  let query1=localStorage.getItem("song")
+  useEffect(() => { 
+
 
   const [myState, setMyState] = useState(true);
 
@@ -70,6 +79,7 @@ useEffect(()=>{
   });
 
   useEffect(() => {
+
     
     if (token != null) {
       let tokenTime =JSON.parse(localStorage.getItem('spotify_token')).timestamp
@@ -79,24 +89,29 @@ useEffect(()=>{
 
      
 
-      console.log("timestamp===>",diffTimestamp)
+      // console.log("timestamp===>",diffTimestamp)
 
       if(diffTimestamp>59){
         dispatch(thunkActionCreator("token"))
       }
       else{
-        
-        dispatch(thunkActionCreator("playlist", token.token));
+        dispatch(thunkActionCreator("oldToken"))
+        // dispatch(thunkActionCreator("playlist", token.token));
+        // dispatch(thunkActionCreator("searchResults", token.token));
+        dispatch(thunkActionCreator("category",token.token))
+        dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
+       
       }
-
+ 
+        
+      
 
     }
     else if(token==null){
       dispatch(thunkActionCreator("token"))
 
     }
-  }, [token]);
-
+  }, [token,debouncedText]);
 
   return (
     <MyContext.Provider value={{myState, toggle}}>
@@ -109,9 +124,13 @@ useEffect(()=>{
       {/* <SignUp/>  */}
       {/* <Navbar/> */}
       {/* <AllRoutes/> */}
+
+     <SearchPage action={setQuery} debounce={debouncedText}/>
+
       
       <SpotifyHomepage/>
       
+
 
       {/* <SpotifyHomepage/> */}
     </div>
