@@ -57,7 +57,7 @@ const GridMain = () => {
         <Box bg="rgb(29,29,29)">
           <HeadGrid />
          
-          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
+          <Flex bg="rgb(29,29,29)" fontSize="2xl" mt='20px' as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Focus</Text>
           </Flex>
 
