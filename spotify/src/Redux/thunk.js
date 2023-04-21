@@ -13,9 +13,14 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
+
+ function thunkActionCreator(method,TOKEN,oldToken) {
+    return (dispatch)=>{
+
  function thunkActionCreator(method,TOKEN,query) {
 console.log(query)
     return (dispatch,getState)=>{
+
 
       // token..................................................
         const getData = async (dispatch) => {
@@ -166,6 +171,9 @@ console.log(query)
           if(method==='category'){
             // getCategoryPlaylists( "15", "30", TOKEN)
             getAllCategoryPlaylists("15", "36", TOKEN)
+          }
+          if(method==='oldToken'){
+            storeOldToken(oldToken)
           }
     }
     

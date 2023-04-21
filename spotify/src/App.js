@@ -75,7 +75,10 @@ useEffect(()=>{
 
 
   store.subscribe(() => {
-    setToken(store.getState().token.toke);
+    if(token==null){
+
+      setToken(store.getState().token.toke);
+    }
   });
 
   useEffect(() => {
@@ -95,12 +98,18 @@ useEffect(()=>{
         dispatch(thunkActionCreator("token"))
       }
       else{
+
+       
+        dispatch(thunkActionCreator("oldToken",null,token))
+        dispatch(thunkActionCreator("playlist", token.token));
+
         dispatch(thunkActionCreator("oldToken"))
         // dispatch(thunkActionCreator("playlist", token.token));
         // dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category",token.token))
         dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
        
+
       }
  
         
@@ -118,7 +127,11 @@ useEffect(()=>{
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
       {/* <DetailsPage /> */}
+
+      <LikePage/>
+
       {/* <LikePage/> */}
+
 
       {/* <Login/>  */}
       {/* <SignUp/>  */}
