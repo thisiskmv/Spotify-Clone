@@ -12,7 +12,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
- function thunkActionCreator(method,TOKEN) {
+ function thunkActionCreator(method,TOKEN,oldToken) {
     return (dispatch)=>{
 
       // token..................................................
@@ -151,6 +151,9 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==='searchResults'){
             getAllSearchResults("punjabi","track,artist",25,TOKEN)
+          }
+          if(method==='oldToken'){
+            storeOldToken(oldToken)
           }
     }
     

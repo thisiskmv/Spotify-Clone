@@ -23,7 +23,10 @@ function App() {
  
 
   store.subscribe(() => {
-    setToken(store.getState().token.toke);
+    if(token==null){
+
+      setToken(store.getState().token.toke);
+    }
   });
 
   useEffect(() => {
@@ -42,7 +45,8 @@ function App() {
         dispatch(thunkActionCreator("token"))
       }
       else{
-        
+       
+        dispatch(thunkActionCreator("oldToken",null,token))
         dispatch(thunkActionCreator("playlist", token.token));
       }
 
@@ -57,8 +61,8 @@ function App() {
   return (
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
-      <DetailsPage />
-      {/* <LikePage/> */}
+      {/* <DetailsPage /> */}
+      <LikePage/>
 
       {/* <Login/>  */}
       {/* <SignUp/>  */}
