@@ -35,7 +35,7 @@ export default function Sidebar() {
   
   const { myState, toggle } = useContext(MyContext);
 
-  console.log("from side",myState);
+  // console.log("from side",myState);
  
   const handleOnChange = () => {
     toggle();

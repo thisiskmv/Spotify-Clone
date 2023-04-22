@@ -62,28 +62,28 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
               }
             );
             let data = await response.json();
-            dispatch(Playlists(data))
-            console.log(data);
+            dispatch(Playlists(data.playlists.items))
+            console.log(data.playlists.items);
 
             
-            try {
+            // try {
 
-              let response = await fetch(
-                `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${TOKEN}`,
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              let data = await response.json();
-              dispatch(Playlists(data.playlists.items))
-              // console.log(data);
+            //   let response = await fetch(
+            //     `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
+            //     {
+            //       headers: {
+            //         Authorization: `Bearer ${TOKEN}`,
+            //         "Content-Type": "application/json",
+            //       },
+            //     }
+            //   );
+            //   let data = await response.json();
+            //   dispatch(Playlists(data.playlists.items))
+            //   // console.log(data);
               
-            } catch (error) {
-              console.log(error)
-            }
+            // } catch (error) {
+            //   console.log(error)
+            // }
 
 
             // return data.playlists.items; 
@@ -165,8 +165,8 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
-            getPlaylists('rock','12',TOKEN)
-            getPlaylists(TOKEN);
+            // getPlaylists('rock','12',TOKEN)
+            // getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
             getAllSearchResults("punjabi","track,artist",25,TOKEN)

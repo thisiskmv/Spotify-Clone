@@ -26,6 +26,8 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { MyContext } from "../Components/context";
+import { SlHeart } from "react-icons/sl";
+
 
 const HeadGrid = () => {
   const [isHovered, setIsHovered] = useState(null);
@@ -33,6 +35,21 @@ const HeadGrid = () => {
 
   const Loggedin = true;
 
+  // useEffect(()=>{
+  
+  // },[])
+  let data=useSelector((store)=>{
+    return store.getPlaylists
+})
+
+const play=data.slice(0, 6)
+
+  // data for playlist
+ 
+console.log("for playlist",play)
+console.log("for testing", play)
+
+  
   const now = new Date();
   const hour = now.getHours();
 
@@ -45,10 +62,6 @@ const HeadGrid = () => {
     greeting = "Good evening";
   }
 
-  let data = useSelector((store) => {
-    return store.getPlaylists;
-  });
-
   const handleMouseEnter = (value) => {
     setIsHovered(value);
     // console.log(value)
@@ -58,7 +71,7 @@ const HeadGrid = () => {
     setIsHovered();
   };
 
-  // console.log("this data ",data);
+ 
   const numRows = 2;
   const numCols = 3;
 
@@ -75,7 +88,7 @@ const HeadGrid = () => {
     p={3}
   >
     <Text color="white">{greeting}</Text>
-  </Flex>
+       </Flex>
 
  <HStack  mr="30px">
    
@@ -86,6 +99,7 @@ const HeadGrid = () => {
      h="20px"
      
    ></Box>
+   
    <SimpleGrid w="100%" columns={3} spacing={4} >
      <Box
        w="100%"
@@ -157,18 +171,22 @@ const HeadGrid = () => {
          display="flex"
          alignItems="center"
          justifyContent="space-between"
+        
+         m={0}
        >
-         <Image
+        <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://i1.sndcdn.com/artworks-y6qitUuZoS6y8LQo-5s2pPA-t500x500.jpg"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
+    
+         
          <Text ml="20px" as="b" color="white">
-           Playlist One
+          Liked Songs 
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -394,6 +412,79 @@ const HeadGrid = () => {
      </Box>
    </SimpleGrid>
  </HStack>
+ <Flex bg="rgb(29,29,29)" fontSize="2xl" mt='20px' as="b" ml={myState ? '240px': '20px'} p={3}>
+            <Text color="white">Made for You</Text>
+          </Flex>
+ <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
+            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
+            
+            {
+
+ play.map(item=>(
+ 
+  <GridItem
+  w="100%"
+  bg="rgb(22,22,22)"
+  boxShadow="sm"
+  borderRadius={10}
+  p={3}
+  _hover={{
+    bg:'rgba(40,40,40,255)',
+    boxShadow:'dark-lg'
+  }}
+ >
+     <Stack
+                spacing={3}
+                // bg={useColorModeValue('gray.100', 'rgb(22,22,22)')}
+                onMouseEnter={() => handleMouseEnter(item.id)}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Center>
+                  <Box>
+                  {
+            item.images.map(imag=>(
+              <Image
+              objectFit="cover"
+              maxW={{ base: "100%", sm: "200px" }}
+              src={imag.url}
+              alt="hot hits"
+              borderRadius={10}
+              align="center"
+            />
+            ))
+          }
+           <Flex justifyContent="right">
+                      <IconButton
+                        position="absolute"
+                        borderRadius={30}
+                        variant="ghost"
+                        aria-label="Play"
+                        color="black"
+                        bg="green"
+                        icon={<FaPlay />}
+                        size="lg"
+                        opacity={isHovered == item.id ? 1 : 0}
+                        transition="opacity 0.2s"
+                        transform="translate(-11px, -55px)"
+                      />
+                    </Flex>
+
+                  </Box>
+                </Center>
+                <Text as="b" color="white">
+                  {item.name}
+                </Text>
+                <Text color="grey" fontSize="sm">
+                  {item.description}
+                </Text>
+              </Stack>
+ 
+ </GridItem>
+))
+            }
+          
+            </Grid>
+ 
   </>
       ):(
      <></>

@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import { Button, Text } from "@chakra-ui/react";
 // import './App.css';
 import { SpotifyHomepage } from "./Pages/Home";
+import UserProfile from "./Pages/Profile";
 
 import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
@@ -58,10 +59,10 @@ function App() {
 //   // }
 //   // 
 // },[])
-useEffect(()=>{
-  dispatch(thunkActionCreator("token"))
-  dispatch(thunkActionCreator("playlist"))
-},[])
+// useEffect(()=>{
+//   dispatch(thunkActionCreator("token"))
+//   dispatch(thunkActionCreator("playlist"))
+// },[])
 
 
 
@@ -110,8 +111,8 @@ useEffect(()=>{
       {/* <Navbar/> */}
       {/* <AllRoutes/> */}
       
-      <SpotifyHomepage/>
-      
+      {/* <SpotifyHomepage/> */}
+      <UserProfile/>
 
       {/* <SpotifyHomepage/> */}
     </div>

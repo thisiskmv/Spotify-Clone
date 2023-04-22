@@ -73,7 +73,7 @@ const SpotifyHomepage = () => {
           <Spacer />
           <Box left={0}>
             {Loggedin ? (
-              <Menu color="white" bg="rgba(40,40,40,255)">
+              <Menu color="white" bg="rgba(40,40,40,255)" mr='10px'>
                 <MenuButton>
                   <Avatar
                     size="md"
