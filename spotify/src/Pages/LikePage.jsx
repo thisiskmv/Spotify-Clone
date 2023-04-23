@@ -22,24 +22,31 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import "../App.css";
+import AudioPlayer from "../Components/AudioPlayer";
 
 const LikePage = () => {
   const [song, setSong] = useState([]);
-  let audio = useRef(new Audio());
+  const [trackIndex, setTrackIndex] = useState(0);
   let toast = useToast();
 
   useEffect(() => {
     setSong(JSON.parse(localStorage.getItem("liked")) || []);
+    
   }, []);
 
-  const removeSong = (index) => {
+  const removeSong = (index,songId) => {
     let arr = [...song];
+    let arr2 =JSON.parse(localStorage.getItem('_likedIds')) || []
     arr = arr.filter((e, id) => {
       return id != index;
     });
 
-    // console.log(arr)
+    arr2 =arr2.filter((id)=>{
+      return id != songId;
+    })
+
     localStorage.setItem("liked", JSON.stringify(arr));
+    localStorage.setItem("_likedIds", JSON.stringify(arr2));
     setSong(arr);
   };
 
@@ -105,33 +112,10 @@ const LikePage = () => {
                     <Tr
                       key={id}
                       onClick={() => {
-                        audio.current.src = "";
-                        audio.current.src = e.track.preview_url;
-                        audio.current.play();
+                        setTrackIndex(id)
                       }}
 
-                      // onMouseEnter={(event)=>{
-                      //   event.stopPropagation();
-                      //   // if(e.target.parentNode.tagName=='TR')
-                      //   //   {
-                      //   //     (e.target.parentNode.children[4].style.opacity ='1')
-                      //   //     e.target.parentNode.children[4].onClick(()=>console.log())
-                      //   //   }
-
-                      //    console.log(event.target.parentNode.tagName)
-                      //   // console.log(e.target.parentNode.tagName)
-                      // }}
-
-                      // onMouseLeave={(e)=>{
-                      //   // e.stopPropagation();
-                      //   // if(e.target.parentNode.tagName=='TR')
-                      //   //   {
-                      //   //     (e.target.parentNode.children[4].style.opacity ='0')
-
-                      //   //   }
-
-                      //   // console.log(e.target.parentNode.tagName)
-                      // }}
+                      
                     >
                       <Td border={"0"}>{id + 1}</Td>
                       <Td border={"0"}>
@@ -147,6 +131,9 @@ const LikePage = () => {
                               fontSize={"md"}
                               noOfLines={1}
                               _hover={{ textDecoration: "underline" }}
+                              color={trackIndex!=null && trackIndex == id ? '#1ed760' : 'white'}
+                             
+                              fontWeight={'500'}
                             >
                               {e.track.name}
                             </Text>
@@ -186,7 +173,7 @@ const LikePage = () => {
                                 duration: 2000,
                               });
 
-                              removeSong(id);
+                              removeSong(id,e.track.id);
 
                               // localStorage.setItem("liked",JSON.stringify([...liked,e]));
                               // setLike([...liked,e]);
@@ -228,7 +215,7 @@ const LikePage = () => {
           </Table>
         </Box>
       </Box>
-      
+      {song.length > 0 && <AudioPlayer items={song} trackIndex={trackIndex} setTrackIndex={setTrackIndex} />}
     </div>
   );
 };

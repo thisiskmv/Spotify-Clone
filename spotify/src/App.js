@@ -61,8 +61,8 @@ function App() {
   return (
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
-      {/* <DetailsPage /> */}
-      <LikePage/>
+      <DetailsPage />
+      {/* <LikePage/> */}
 
       {/* <Login/>  */}
       {/* <SignUp/>  */}
