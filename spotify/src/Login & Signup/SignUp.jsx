@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {useSelector} from "react-redux"
-import { useToast } from '@chakra-ui/react'
+import { useSelector } from "react-redux";
+import { useToast } from "@chakra-ui/react";
 import {
   Img,
   Center,
@@ -19,29 +19,35 @@ import {
   Heading,
   Container,
   InputRightElement,
-  InputGroup
+  InputGroup,
 } from "@chakra-ui/react";
 import { FaFacebook } from "react-icons/fa";
 import { AiFillApple } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
-const initial={
+const initial = {
   email: "",
   password: "",
   name: "",
   year: "",
   month: "",
   day: "",
-  Confirmpassword:""
-}
+  Confirmpassword: "",
+};
 
 function SignUp(props) {
-  let isAuth=useSelector((store)=>{
+  let jsonData=JSON.parse(localStorage.getItem("userDetails"))
+  let isAuth = useSelector((store) => {
     return store.isAuth;
-  })
-  const toast = useToast()
+  });
+  const toast = useToast();
+
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+  const [shows, setShows] = React.useState(false);
+  const handleClicks = () => setShows(!shows);
+
   const [state, setState] = useState([]);
   const [userData, setUserData] = useState({
     email: "",
@@ -50,36 +56,71 @@ function SignUp(props) {
     year: "",
     month: "",
     day: "",
-    Confirmpassword:""
+    Confirmpassword: "",
   });
 
- 
   const sendRegesterData = () => {
-      if(userData.email==""||userData.password==""||userData.name==""||userData.year==""||userData.month==""||userData.day==""||userData.Confirmpassword==""){
+    if (
+      userData.email == "" ||
+      userData.password == "" ||
+      userData.name == "" ||
+      userData.year == "" ||
+      userData.month == "" ||
+      userData.day == "" ||
+      userData.Confirmpassword == ""
+    ) {
+   
+      toast({
+        position: "top-right",
+        title: "Attention!.",
+        description: "Please fill all the fields!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+
+
+
+      
+    } 
+    else if (userData.password !== userData.Confirmpassword) {
+      toast({
+        position: "top-right",
+        title: `Confirm password dosn't match`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      let array=[...jsonData]
+      array=array.filter((elm)=>{
+        return elm.email===userData.email 
+      })
+      if(array.length==1){
         toast({
           position: 'top-right',
-          title: 'Attention!.',
-          description: "Please fill all the fields!",
+          title: 'User already exists!.',
+          description: "Please Login now...",
           status: 'error',
           duration: 3000,
           isClosable: true,
         })
       }else{
-        localStorage.setItem("userDetails",JSON.stringify([...state, userData])) 
-        setState([...state, userData]);
-        console.log(state)
-        setUserData(initial)
-        isAuth = true;
-        toast({
-          position: 'top-right',
-          title: 'Account Created.',
-          description: "Successfully created Account!",
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        })
-      }
-      
+      localStorage.setItem("userDetails", JSON.stringify([...state, userData]));
+      setState([...state, userData]);
+      console.log(state);
+      setUserData(initial);
+      isAuth = true;
+      toast({
+        position: "top-right",
+        title: "Account Created.",
+        description: "Successfully created Account!",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }
   };
 
   return (
@@ -95,7 +136,7 @@ function SignUp(props) {
       </Box>
       <div style={{ margin: "auto", marginBottom: "3rem", width: "30rem" }}>
         <Center>
-          <Heading fontSize="1.9rem" mt="1rem" mb="3rem">
+          <Heading fontSize="1.9rem" mt="1rem" mb="1rem">
             Sign up for free to start listening.
           </Heading>
         </Center>
@@ -131,7 +172,7 @@ function SignUp(props) {
         </Center>
 
         <Center mt="1rem">
-          <h5 style={{fontSize:"1.4rem"}}>OR</h5>
+          <h5 style={{ fontSize: "1.4rem" }}>OR</h5>
         </Center>
 
         <div style={{ marginTop: "2rem" }}>
@@ -187,7 +228,7 @@ function SignUp(props) {
           <InputGroup size="md">
             <Input
               pr="4.5rem"
-              type={show ? "text" : "password"}
+              type={shows ? "text" : "password"}
               w="30rem"
               p="1.6rem"
               value={userData.Confirmpassword}
@@ -203,12 +244,12 @@ function SignUp(props) {
               }
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.75rem" mt="0.8rem" size="sm" onClick={handleClick}>
-                {show ? "Hide" : "Show"}
+              <Button h="1.75rem" mt="0.8rem" size="sm" onClick={handleClicks}>
+                {shows ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
-         
+
           <Text mb="8px" mt="0.8rem">
             What should we call you?
           </Text>

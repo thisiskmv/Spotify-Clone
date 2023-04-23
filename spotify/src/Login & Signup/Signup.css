@@ -5,8 +5,8 @@ h5:before{
     display: block;
     background: rgba(128, 128, 128, 0.445);
     position: absolute;
-    top: 29%;
-    left: 37.5rem;
+    top: 27.5%;
+    left: 32rem;
 } 
 h5:after{
     content: "";
@@ -15,6 +15,6 @@ h5:after{
     display: block;
     background: rgba(128, 128, 128, 0.418);
     position: absolute;
-    top: 29%;
-    right: 37.5rem;
+    top: 27.5%;
+    right: 32rem;
 } 

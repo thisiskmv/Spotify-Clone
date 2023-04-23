@@ -165,7 +165,7 @@ const SearchPage = ({ action, debounce }) => {
         >
           {data.map((elm, i) => {
             return (
-              <div key={i}>
+              <div key={i} style={{boxShadow:"0 0 8px grey",borderRadius: "1rem"}}>
                 <img src={elm.icons[0].url} style={{ borderRadius: "1rem" }} />
 
                 <p
@@ -220,14 +220,14 @@ const SearchPage = ({ action, debounce }) => {
                   
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Image w="10rem" src={data2[1].album.images[1].url} />
+                  <Image w="10rem" src={data2[0].album.images[1].url} />
                   <Heading mt="1rem">{data2[1].album.name}</Heading>
                   <Flex mt="0.5rem" color="#b3b3b3">
                     <p>{data2[1].artists[0].name + ","}</p>
                     <p style={{ margin: "0 0.2rem" }}>
                       {data2[1].artists[1].name}
                     </p>
-                    <p>{data2[1].artists[2].name}</p>
+                    {/* <p>{data2[1].artists[2].name}</p> */}
                   </Flex>
                   <Flex justifyContent="right">
                      <IconButton

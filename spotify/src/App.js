@@ -62,8 +62,8 @@ function App() {
         dispatch(thunkActionCreator("playlist", token.token));
 
         // dispatch(thunkActionCreator("oldToken"))
-        // dispatch(thunkActionCreator("playlist", token.token));
-        // dispatch(thunkActionCreator("searchResults", token.token));
+        dispatch(thunkActionCreator("playlist", token.token));
+        dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category", token.token));
         dispatch(
           thunkActionCreator("searchResults", token.token, null, debouncedText)
@@ -85,9 +85,9 @@ function App() {
         {/* <LikePage/> */}
 
         {/* <Login/>  */}
-        {/* <SignUp/>  */}
+        <SignUp/> 
         {/* <Navbar/> */}
-        <AllRoutes />
+        {/* <AllRoutes /> */}
 
         <SearchPage action={setQuery} debounce={debouncedText}/>
         {/* <Dictaphone/> */}

@@ -156,7 +156,7 @@ console.log(query)
             getData(dispatch) 
           }
           if(method==="playlist"){
-            getPlaylists('party','14',TOKEN)
+            getPlaylists('bollywood','18',TOKEN)
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query,5)
