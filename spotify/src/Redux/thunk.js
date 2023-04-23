@@ -14,9 +14,10 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
-function thunkActionCreator(method,TOKEN,oldToken,query) {
 
-console.log(query)
+
+ function thunkActionCreator(method,TOKEN,oldToken,query,playlist_id) {
+
     return (dispatch,getState)=>{
 
 
@@ -46,10 +47,10 @@ console.log(query)
 
 
           // playlists////////////////////////////////////
-          async function getPlaylists(category, limit, TOKEN) {
+          async function getPlaylists(playlist_id, limit, TOKEN) {
 
             let response = await fetch(
-              `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
+              `https://api.spotify.com/v1/playlists/37i9dQZF1DWXtlo6ENS92N?country=IN`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -58,7 +59,8 @@ console.log(query)
               }
             );
             let data = await response.json();
-            dispatch(Playlists(data.playlists.items))
+            // console.log(data);
+            dispatch(Playlists(data))
 
           
 
@@ -156,7 +158,11 @@ console.log(query)
             getData(dispatch) 
           }
           if(method==="playlist"){
+
+            getPlaylists(playlist_id,'14',TOKEN)
+
             getPlaylists('bollywood','18',TOKEN)
+
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query,5)
@@ -175,4 +181,4 @@ console.log(query)
     }
     
   }
-  export default thunkActionCreator
+  export default thunkActionCreator;

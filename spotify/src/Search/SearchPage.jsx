@@ -38,9 +38,7 @@ import Sidebar from "../Components/side";
 import Footermain from "../Pages/Footermain";
 import { FaSearch } from "react-icons/fa";
 import { MdOutlineSettingsVoice } from "react-icons/md";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import store from "../Redux/store";
 import { FaPlay } from "react-icons/fa";
 import {MyContext} from '../Components/context'

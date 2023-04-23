@@ -62,12 +62,25 @@ function App() {
         dispatch(thunkActionCreator("playlist", token.token));
 
         // dispatch(thunkActionCreator("oldToken"))
+
+        // dispatch(thunkActionCreator("playlist", token.token));
+        // dispatch(thunkActionCreator("searchResults", token.token));
+        // dispatch(thunkActionCreator("category", token.token));
+        // dispatch(
+        //   thunkActionCreator("searchResults", token.token, null, debouncedText)
+        // );
+        dispatch(thunkActionCreator("category",token.token))
+        // dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
+       
+
+
         dispatch(thunkActionCreator("playlist", token.token));
         dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category", token.token));
         dispatch(
           thunkActionCreator("searchResults", token.token, null, debouncedText)
         );
+
       }
     } else if (token == null) {
       dispatch(thunkActionCreator("token"));
@@ -82,12 +95,20 @@ function App() {
 
         {/* <LikePage/> */}
 
-        {/* <LikePage/> */}
+      {/* <LikePage/> */}
+
+
+
+      {/* <Login/>  */}
+      {/* <SignUp/>  */}
+      {/* <Navbar/> */}
+      <AllRoutes/>
 
         {/* <Login/>  */}
         <SignUp/> 
         {/* <Navbar/> */}
         {/* <AllRoutes /> */}
+
 
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
