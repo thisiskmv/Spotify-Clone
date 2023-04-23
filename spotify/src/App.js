@@ -71,9 +71,6 @@ function App() {
         dispatch(thunkActionCreator("oldToken",null,token))
         dispatch(thunkActionCreator("playlist", token.token));
 
-        dispatch(thunkActionCreator("oldToken"))
-        // dispatch(thunkActionCreator("playlist", token.token));
-        // dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category",token.token))
         dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
        
@@ -96,7 +93,7 @@ function App() {
       {/* <h1>Spotify Clone</h1> */}
       {/* <DetailsPage /> */}
 
-      <LikePage/>
+      {/* <LikePage/> */}
 
       {/* <LikePage/> */}
 
@@ -110,7 +107,7 @@ function App() {
 
       
       {/* <SpotifyHomepage/> */}
-      <UserProfile/>
+      {/* <UserProfile/> */}
 
 
       {/* <SpotifyHomepage/> */}

@@ -14,10 +14,9 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
- function thunkActionCreator(method,TOKEN,oldToken) {
-    return (dispatch)=>{
 
- function thunkActionCreator(method,TOKEN,query) {
+
+ function thunkActionCreator(method,TOKEN,oldToken,query) {
 console.log(query)
     return (dispatch,getState)=>{
 
@@ -180,4 +179,4 @@ console.log(query)
     }
     
   }
-  export default thunkActionCreator
+  export default thunkActionCreator;
