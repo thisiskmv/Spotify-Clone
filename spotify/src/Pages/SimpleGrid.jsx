@@ -384,14 +384,14 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA7iGj6e1beIlllnVFqLHyxieDoFLLVITCrgrREhGfTxDPsJoZ"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+           Gym Playlist
          </Text>
          <Spacer />
          <Flex justifyContent="right">

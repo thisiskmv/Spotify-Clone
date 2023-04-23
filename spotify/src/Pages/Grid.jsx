@@ -89,12 +89,7 @@ const GridMain = () => {
  </Stack>
             </Flex>
           </ModalBody>
-          {/* <ModalFooter>
-            <Button colorScheme='blue' variant='ghost' mt={10} mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter> */}
+        
         </ModalContent>
       </Modal>
       <Flex position='static'  h='100%'left={0}
