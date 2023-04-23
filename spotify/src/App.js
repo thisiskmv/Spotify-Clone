@@ -89,10 +89,10 @@ function App() {
         {/* <Navbar/> */}
         <AllRoutes />
 
-        <SearchPage action={setQuery} debounce={debouncedText}/>
+        {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
 
-        {/* <SpotifyHomepage/> */}
+        <SpotifyHomepage/>
 
         {/* <SpotifyHomepage/> */}
       </div>

@@ -1,5 +1,13 @@
 import React, { useState,useContext } from "react";
 import {
+  Disclosure ,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
   Center,
   Card,
   Box,
@@ -20,6 +28,7 @@ import {
   IconButton,
   Spacer,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import HeadGrid from "./SimpleGrid";
 import Footermain from "./Footermain";
@@ -30,6 +39,7 @@ import DynamicGrid from "./playlistgrid";
 const GridMain = () => {
   const [isHovered, setIsHovered] = useState(null);
   const { myState, toggle } = useContext(MyContext);
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   // console.log("from grid",myState);
  
@@ -49,6 +59,44 @@ const GridMain = () => {
   return (
     <>
       <Flex bg='rgb(29,29,29)'>
+      <Modal
+        isCentered
+        onClose={onClose}
+        isOpen={isOpen}
+        motionPreset='slideInBottom'
+        size='xl' 
+      >
+        <ModalOverlay />
+        <ModalContent bg='rgb(41,41,41)' p={3}  >
+         
+          <ModalCloseButton color='white' />
+          <ModalBody p={3} m={4} color='#373737'>
+           
+            <Flex >
+             
+            <Image
+                    objectFit="cover"
+                    w='90%'
+                    src="https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+                    alt="hot hits"
+                    borderRadius={10}
+                    p={2}
+                  />
+                <Stack p={3} >
+                <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
+                  <Button alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
+                  <Button w='90%' color='white' borderRadius={30} p={4}  variant='outline' >Log in</Button>           
+ </Stack>
+            </Flex>
+          </ModalBody>
+          {/* <ModalFooter>
+            <Button colorScheme='blue' variant='ghost' mt={10} mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant='ghost'>Secondary Action</Button>
+          </ModalFooter> */}
+        </ModalContent>
+      </Modal>
       <Flex position='static'  h='100%'left={0}
            flexDir="column"
            w={myState ?'350px':'175px'}
@@ -127,6 +175,7 @@ const GridMain = () => {
                 bg:'rgba(40,40,40,255)',
                 boxShadow:'dark-lg'
               }}
+              onClick={onOpen}
             >
               <Stack spacing={3}>
                 <Center>
