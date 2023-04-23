@@ -62,6 +62,7 @@ function App() {
         dispatch(thunkActionCreator("playlist", token.token));
 
         // dispatch(thunkActionCreator("oldToken"))
+
         // dispatch(thunkActionCreator("playlist", token.token));
         // dispatch(thunkActionCreator("searchResults", token.token));
         // dispatch(thunkActionCreator("category", token.token));
@@ -71,6 +72,14 @@ function App() {
         dispatch(thunkActionCreator("category",token.token))
         // dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
        
+
+
+        dispatch(thunkActionCreator("playlist", token.token));
+        dispatch(thunkActionCreator("searchResults", token.token));
+        dispatch(thunkActionCreator("category", token.token));
+        dispatch(
+          thunkActionCreator("searchResults", token.token, null, debouncedText)
+        );
 
       }
     } else if (token == null) {
@@ -89,15 +98,22 @@ function App() {
       {/* <LikePage/> */}
 
 
+
       {/* <Login/>  */}
       {/* <SignUp/>  */}
       {/* <Navbar/> */}
       <AllRoutes/>
 
+        {/* <Login/>  */}
+        <SignUp/> 
+        {/* <Navbar/> */}
+        {/* <AllRoutes /> */}
+
+
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
 
-        {/* <SpotifyHomepage/> */}
+        <SpotifyHomepage/>
 
         {/* <SpotifyHomepage/> */}
       </div>

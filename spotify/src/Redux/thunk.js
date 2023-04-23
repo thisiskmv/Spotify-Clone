@@ -158,7 +158,11 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             getData(dispatch) 
           }
           if(method==="playlist"){
+
             getPlaylists(playlist_id,'14',TOKEN)
+
+            getPlaylists('bollywood','18',TOKEN)
+
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query,5)
