@@ -45,7 +45,6 @@ function App() {
         dispatch(thunkActionCreator("token"))
       }
       else{
-       
         dispatch(thunkActionCreator("oldToken",null,token))
         dispatch(thunkActionCreator("playlist", token.token));
       }
