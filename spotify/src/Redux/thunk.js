@@ -4,9 +4,11 @@ import { Track } from "./action";
 import { getAlbum } from "./action";
 import { CategoryPlaylists } from "./action";
 import { getSearchResults } from "./action";
+
 let client_id= 'd49a92ae8bd040d18dc326af31826688';
-// let TOKEN='BQChE0QZWhBrlSnz-N8z1aa7ci9GWMZUwmbzC-0a5LMfSThYtYUfzzL-AtMzURjAsz0ivcPg6yJJE9zTyyR5e5RL_jd9KM0H698two2XOpe8-IwKH3HP'
+
 let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
+
 
 
 
@@ -14,6 +16,11 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
  function thunkActionCreator(method,TOKEN,oldToken) {
     return (dispatch)=>{
+
+ function thunkActionCreator(method,TOKEN,query) {
+console.log(query)
+    return (dispatch,getState)=>{
+
 
       // token..................................................
         const getData = async (dispatch) => {
@@ -38,37 +45,25 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
               dispatch({type:"oldToken",payload:tokenData})
           }
         
-          // async function refreshToken() {
-          //   let newToken = await getData();
-          //   console.log(newToken)
-            
-          // }
 
 
           // playlists////////////////////////////////////
           async function getPlaylists(category, limit, TOKEN) {
-            
-            try {
 
-              let response = await fetch(
-                `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${TOKEN}`,
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              let data = await response.json();
-              dispatch(Playlists(data.playlists.items))
-              // console.log(data);
-              
-            } catch (error) {
-              console.log(error)
-            }
+            let response = await fetch(
+              `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${TOKEN}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            let data = await response.json();
+            dispatch(Playlists(data.playlists.items))
 
-           
-            // return data.playlists.items; 
+          
+
           }
         //  track................................................
           async function getTrack(dispatch,playlistID, TOKEN) {
@@ -105,9 +100,9 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
            
 
           // search data.........................................
-          async function getAllSearchResults(query, type, limit, TOKEN) {
+          async function getAllSearchResults( TOKEN,query) {
             let response = await fetch(
-              `https://api.spotify.com/v1/search?type=${type}&q=${query}?offset=5&limit=${limit}`,
+              `https://api.spotify.com/v1/search?query=${query}&type=track&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=20`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -116,14 +111,19 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
               }
             );
             let data = await response.json();
+
+            dispatch(getSearchResults(data.tracks.items))
+            // console.log(data.artists,data.tracks)
+
             dispatch(getSearchResults(data))
-            console.log(data)
+            // console.log(data)
+
             // return data;
           }
            
 
           // category playlists.......................................
-          async function getCategoryPlaylists(dispatch,category, offset, limit, TOKEN) {
+          async function getCategoryPlaylists(category, offset, limit, TOKEN) {
             let response = await fetch(
               `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=${offset}&limit=${limit}`,
               {
@@ -135,8 +135,25 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             );
             let data = await response.json();
             dispatch(CategoryPlaylists(data))
-            // console.log(data);
-            return data.playlists.items;
+            console.log(data);
+            // return data.playlists.items;
+          }
+
+
+          async function getAllCategoryPlaylists(offset, limit, TOKEN) {
+            let response = await fetch(
+              `https://api.spotify.com/v1/browse/categories?country=IN&offset=${offset}&limit=${limit}`,
+              {
+                headers: {
+                  Authorization: `Bearer ${TOKEN}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            let data = await response.json();
+            dispatch(CategoryPlaylists(data.categories.items))
+            // console.log(data.categories.items);
+            // return data.playlists.items;
           }
 
 
@@ -147,10 +164,15 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
-            getPlaylists('rock','12',TOKEN)
+            // getPlaylists('rock','12',TOKEN)
+            // getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
-            getAllSearchResults("punjabi","track,artist",25,TOKEN)
+            getAllSearchResults(TOKEN,query)
+          }
+          if(method==='category'){
+            // getCategoryPlaylists( "15", "30", TOKEN)
+            getAllCategoryPlaylists("15", "36", TOKEN)
           }
           if(method==='oldToken'){
             storeOldToken(oldToken)

@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import { Button, Text } from "@chakra-ui/react";
 // import './App.css';
 import { SpotifyHomepage } from "./Pages/Home";
+import UserProfile from "./Pages/Profile";
 
 import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
@@ -11,16 +12,35 @@ import SignUp from "./Login & Signup/SignUp";
 import AllRoutes from "./Routes/AllRoutes";
 import Navbar from "./Routes/Navbar";
 import thunkActionCreator from "./Redux/thunk";
+import {useDebounce} from "use-debounce";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import store from "./Redux/store";
 import getData from "./Redux/thunk";
 
+import SearchPage from "./Search/SearchPage";
+
+import { MyContext } from './Components/context';
+
 function App() {
+ 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem('spotify_token')) || null);
   let dispatch = useDispatch();
 
+  let [query,setQuery] = useState("");
+  let [debouncedText]=useDebounce(query,1000);
+
+
+
+
+  const [myState, setMyState] = useState(true);
+
  
+  const toggle =()=>{
+    setMyState((prev)=>!prev);
+  }
+
+
 
   store.subscribe(() => {
     if(token==null){
@@ -30,6 +50,7 @@ function App() {
   });
 
   useEffect(() => {
+
     
     if (token != null) {
       let tokenTime =JSON.parse(localStorage.getItem('spotify_token')).timestamp
@@ -39,37 +60,62 @@ function App() {
 
      
 
-      console.log("timestamp===>",diffTimestamp)
+      // console.log("timestamp===>",diffTimestamp)
 
       if(diffTimestamp>59){
         dispatch(thunkActionCreator("token"))
       }
       else{
+
+       
         dispatch(thunkActionCreator("oldToken",null,token))
         dispatch(thunkActionCreator("playlist", token.token));
-      }
 
+        dispatch(thunkActionCreator("oldToken"))
+        // dispatch(thunkActionCreator("playlist", token.token));
+        // dispatch(thunkActionCreator("searchResults", token.token));
+        dispatch(thunkActionCreator("category",token.token))
+        dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
+       
+
+      }
+ 
+        
+      
 
     }
     else if(token==null){
       dispatch(thunkActionCreator("token"))
 
     }
-  }, [token]);
+  }, [token,debouncedText]);
 
   return (
+    <MyContext.Provider value={{myState, toggle}}>
     <div className="App">
       {/* <h1>Spotify Clone</h1> */}
-      <DetailsPage />
+      {/* <DetailsPage /> */}
+
+      <LikePage/>
+
       {/* <LikePage/> */}
+
 
       {/* <Login/>  */}
       {/* <SignUp/>  */}
       {/* <Navbar/> */}
       {/* <AllRoutes/> */}
 
+     <SearchPage action={setQuery} debounce={debouncedText}/>
+
+      
+      {/* <SpotifyHomepage/> */}
+      <UserProfile/>
+
+
       {/* <SpotifyHomepage/> */}
     </div>
+    </MyContext.Provider>
   );
 }
 
