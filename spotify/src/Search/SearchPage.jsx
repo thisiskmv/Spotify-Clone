@@ -63,7 +63,9 @@ const SearchPage = ({ action, debounce }) => {
   let data = useSelector((store) => {
     return store.CategoryPlaylists;
   });
-  // console.log(data)
+
+  const mana= data.splice(6, 1)  
+  console.log(data,"this is daata");
   let data2 = useSelector((store) => {
     return store.searchResults;
   });
