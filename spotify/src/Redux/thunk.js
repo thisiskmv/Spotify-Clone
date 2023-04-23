@@ -16,8 +16,8 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
- function thunkActionCreator(method,TOKEN,oldToken,query) {
-console.log(query)
+ function thunkActionCreator(method,TOKEN,oldToken,query,playlist_id) {
+
     return (dispatch,getState)=>{
 
 
@@ -47,10 +47,10 @@ console.log(query)
 
 
           // playlists////////////////////////////////////
-          async function getPlaylists(category, limit, TOKEN) {
+          async function getPlaylists(playlist_id, limit, TOKEN) {
 
             let response = await fetch(
-              `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
+              `https://api.spotify.com/v1/playlists/37i9dQZF1DWXtlo6ENS92N?country=IN`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -59,7 +59,8 @@ console.log(query)
               }
             );
             let data = await response.json();
-            dispatch(Playlists(data.playlists.items))
+            // console.log(data);
+            dispatch(Playlists(data))
 
           
 
@@ -82,9 +83,9 @@ console.log(query)
           
 
           // albumtrack.........................................
-          async function getAlbumTrack(dispatch,albumID, TOKEN) {
+          async function getAlbumTrack( TOKEN) {
             let res = await fetch(
-              `https://api.spotify.com/v1/albums/${albumID}/tracks?offset=0&limit=20`,
+              `https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy/tracks?offset=0&limit=20`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -94,14 +95,14 @@ console.log(query)
             );
             let data = await res.json();
             dispatch(getAlbum(data))
-            return data;
+            // return data;
           }
            
 
           // search data.........................................
-          async function getAllSearchResults( TOKEN,query) {
+          async function getAllSearchResults( TOKEN,query,limit) {
             let response = await fetch(
-              `https://api.spotify.com/v1/search?query=${query}&type=track&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=20`,
+              `https://api.spotify.com/v1/search?query=${query}&type=track&locale=en-US%2Cen%3Bq%3D0.9&offset=0&limit=${limit}`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -112,12 +113,7 @@ console.log(query)
             let data = await response.json();
 
             dispatch(getSearchResults(data.tracks.items))
-            // console.log(data.artists,data.tracks)
 
-            dispatch(getSearchResults(data))
-            // console.log(data)
-
-            // return data;
           }
            
 
@@ -162,12 +158,11 @@ console.log(query)
             getData(dispatch) 
           }
           if(method==="playlist"){
-            getPlaylists('party','11',TOKEN)
-            // getPlaylists('rock','12',TOKEN)
-            // getPlaylists(TOKEN);
+            getPlaylists(playlist_id,'14',TOKEN)
           }
           if(method==='searchResults'){
-            getAllSearchResults(TOKEN,query)
+            getAllSearchResults(TOKEN,query,5)
+            
           }
           if(method==='category'){
             // getCategoryPlaylists( "15", "30", TOKEN)
@@ -175,6 +170,9 @@ console.log(query)
           }
           if(method==='oldToken'){
             storeOldToken(oldToken)
+          }
+          if(method==='album'){
+            getAlbumTrack(TOKEN)
           }
     }
     

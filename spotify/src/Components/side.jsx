@@ -46,6 +46,7 @@ export default function Sidebar() {
   return (
     <Flex
       position="fixed"
+      zIndex={2}
       left={0}
       top={0}
       h="100%"
