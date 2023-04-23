@@ -1,6 +1,24 @@
 import React, { useRef, useState } from "react";
-import { Icon, Tooltip, useToast } from "@chakra-ui/react";
+import {
+  ButtonGroup,
+  Icon,
+  Input,
+  Progress,
+  Slider,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderTrack,
+  Tooltip,
+  useToast,
+} from "@chakra-ui/react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { BiVolumeFull } from "react-icons/bi";
+import {
+  MdOutlinePlayCircleFilled,
+  MdSkipPrevious,
+  MdSkipNext,
+  MdPauseCircleFilled,
+} from "react-icons/md";
 import {
   Box,
   Image,
@@ -17,7 +35,7 @@ import {
   Skeleton,
   Center,
   Button,
-  toast
+  toast,
 } from "@chakra-ui/react";
 import "../App.css";
 
@@ -32859,7 +32877,8 @@ const obj = {
 };
 
 const DetailsPage = () => {
-  const[liked,setLike] =useState([])
+  const [liked, setLike] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
   let audio = useRef(new Audio());
   let toast = useToast();
 
@@ -32869,7 +32888,7 @@ const DetailsPage = () => {
         <Box
           p={"32px 24px"}
           bg={"rgb(40, 112, 168)"}
-          bgGradient={'linear-gradient(transparent 0,rgba(0,0,0,.5) 100%)'}
+          bgGradient={"linear-gradient(transparent 0,rgba(0,0,0,.5) 100%)"}
           color={"white"}
         >
           <Flex alignItems={"center"}>
@@ -32929,15 +32948,15 @@ const DetailsPage = () => {
                       }}
 
                       // onMouseEnter={(event)=>{
-                      //   event.stopPropagation();
-                      //   // if(e.target.parentNode.tagName=='TR')
-                      //   //   {
-                      //   //     (e.target.parentNode.children[4].style.opacity ='1')
-                      //   //     e.target.parentNode.children[4].onClick(()=>console.log())
-                      //   //   }
-
-                      //    console.log(event.target.parentNode.tagName)
-                      //   // console.log(e.target.parentNode.tagName)
+                      // event.stopPropagation();
+                      // if(e.target.parentNode.tagName=='TR')
+                      //   {
+                      //     (e.target.parentNode.children[4].style.opacity ='1')
+                      //     e.target.parentNode.children[4].onClick(()=>console.log())
+                      //   }
+                      // event.target.parentNode.children[4].children[0].style.opacity ='1'
+                      //  console.log(event.target.parentNode.tagName)
+                      // console.log(e.target.parentNode.tagName)
                       // }}
 
                       // onMouseLeave={(e)=>{
@@ -32945,7 +32964,7 @@ const DetailsPage = () => {
                       //   // if(e.target.parentNode.tagName=='TR')
                       //   //   {
                       //   //     (e.target.parentNode.children[4].style.opacity ='0')
-
+                      // e.target.parentNode.children[4].children[0].style.opacity ='0'
                       //   //   }
 
                       //   // console.log(e.target.parentNode.tagName)
@@ -32985,27 +33004,34 @@ const DetailsPage = () => {
                       </Td>
                       {/* <Td>{e.added_at}</Td> */}
                       <Td border={"0"}>{`1 day ago`}</Td>
-                        <Tooltip bg="black" p={'10px 16px'} label='Add to like songs' placement={'left'} hasArrow>
-                      <Td border={"0"}>
-                        <Icon
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            toast({
-                              title: e.track.name,
-                              description:
-                                "Added to Liked Song",
-                              status: "success",
-                              duration: 2000,
-                              
-                            });
+                      <Tooltip
+                        bg="black"
+                        p={"10px 16px"}
+                        label="Add to like songs"
+                        placement={"left"}
+                        hasArrow
+                      >
+                        <Td border={"0"}>
+                          <Icon
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              toast({
+                                title: e.track.name,
+                                description: "Added to Liked Song",
+                                status: "success",
+                                duration: 2000,
+                              });
 
-                            localStorage.setItem("liked",JSON.stringify([...liked,e]));
-                            setLike([...liked,e]);
-                          }}
-                          as={AiOutlineHeart}
-                        />
-                      </Td>
-                        </Tooltip>
+                              localStorage.setItem(
+                                "liked",
+                                JSON.stringify([...liked, e])
+                              );
+                              setLike([...liked, e]);
+                            }}
+                            as={AiOutlineHeart}
+                          />
+                        </Td>
+                      </Tooltip>
                       <Td border={"0"}>
                         {Math.floor(e.track.duration_ms / 60000)}:
                         {((e.track.duration_ms % 60000) / 1000).toFixed(0)}
@@ -33023,6 +33049,127 @@ const DetailsPage = () => {
             </Tbody>
           </Table>
         </Box>
+      </Box>
+      <Box
+        position={"fixed"}
+        bottom={"0"}
+        bg={"#181818"}
+        height={"90px"}
+        width={"100%"}
+        border={"3px solid "}
+        p={"0 16px"}
+      >
+        <Flex
+          color={"white"}
+          h={"100%"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Box flex={"1"} className="leftContainer">
+            <Flex alignItems={"center"}>
+              <Image
+                src={obj.tracks.items[0].track.album.images[2].url}
+                w={"56px"}
+                h={"56px"}
+                mr={"16px"}
+              />
+              <Stack direction={"column"} spacing={"1"} textAlign={"left"}>
+                <Heading
+                  as={"h2"}
+                  fontSize={"sm"}
+                  noOfLines={1}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  {obj.tracks.items[0].track.name}
+                </Heading>
+                <Text
+                  fontSize={"xs"}
+                  noOfLines={1}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  {obj.tracks.items[0].track.artists
+                    .map((e) => e.name)
+                    .join(", ")}
+                </Text>
+              </Stack>
+            </Flex>
+          </Box>
+          <Box flex={"1"} className="midContainer">
+            <Flex
+              direction={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Flex className="playerControls-btn">
+                <ButtonGroup color={"black"} gap={"10px"} alignItems={"center"}>
+                  <Icon
+                    as={MdSkipPrevious}
+                    color={"gray"}
+                    boxSize={"32px"}
+                    _hover={{ color: "white" }}
+                  />
+                  <Icon
+                    as={
+                      isPlaying
+                        ? MdPauseCircleFilled
+                        : MdOutlinePlayCircleFilled
+                    }
+                    color={"white"}
+                    boxSize={"42px"}
+                    _hover={{ transform: "scale(1.08)" }}
+                    onClick={() => setIsPlaying(!isPlaying)}
+                  />
+                  <Icon
+                    as={MdSkipNext}
+                    color={"gray"}
+                    boxSize={"32px"}
+                    _hover={{ color: "white" }}
+                  />
+                </ButtonGroup>
+              </Flex>
+              <Flex
+                w={"100%"}
+                gap={"8px"}
+                justify={"space-between"}
+                alignItems={"center"}
+                className="progressBar"
+              >
+                <Box>2:36</Box>
+                {/* <Box width={'100%'} > <Progress colorScheme="white" size={'xs'} value={'20'}/></Box> */}
+                <Box width={"100%"}>
+                  {" "}
+                  <Slider
+                    aria-label="slider-ex-1"
+                    colorScheme="green"
+                    defaultValue={30}
+                  >
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb />
+                  </Slider>
+                </Box>
+                <Box>5:00</Box>
+              </Flex>
+            </Flex>
+          </Box>
+          <Box flex={"1"} className="rightContainer">
+            <Flex justify={"end"} alignItems={"center"} pr={"20px"}>
+              <Icon as={BiVolumeFull} boxSize={"24px"} />
+              <Slider
+                aria-label="slider-ex-1"
+                colorScheme="green"
+                defaultValue={30}
+                width={"20%"}
+              >
+                <SliderTrack>
+                  <SliderFilledTrack />
+                </SliderTrack>
+                <SliderThumb />
+              </Slider>
+            </Flex>
+          </Box>
+        </Flex>
       </Box>
     </div>
   );
