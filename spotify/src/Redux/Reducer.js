@@ -1,4 +1,5 @@
 let initial={
+    isAuth:false,
     token:{
         toke:"",
         time:""
