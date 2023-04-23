@@ -33,7 +33,7 @@ import {
 } from "react-icons/md";
 import GridMain from "../Pages/Grid";
 import { useSelector } from "react-redux";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import Sidebar from "../Components/side";
 import Footermain from "../Pages/Footermain";
 import { FaSearch } from "react-icons/fa";
@@ -43,8 +43,10 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import store from "../Redux/store";
 import { FaPlay } from "react-icons/fa";
+import {MyContext} from '../Components/context'
 
 const SearchPage = ({ action, debounce }) => {
+  const { myState, toggle } = useContext(MyContext);
   const [liked, setLike] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(null);
@@ -81,8 +83,17 @@ const SearchPage = ({ action, debounce }) => {
     }, 2000);
   }
   // console.log(speech,searchText);
+  const handleMouseEnter = (value) => {
+    setIsHovered(value);
+    console.log(value,"ohgafosdihf")
+  };
 
-  // console.log(data2)
+  const handleMouseLeave = () => {
+    setIsHovered();
+    console.log(isHovered,"hover value")
+  };
+
+  console.log(data2,"from search page")
   return (
     <div style={{ background: "rgba(0, 0, 0, 0.900)" }}>
       <Sidebar />
@@ -201,6 +212,13 @@ const SearchPage = ({ action, debounce }) => {
                   w="35rem"
                   p="1rem"
                   lineHeight="2rem"
+                  _hover={{
+                    bg:'rgba(40,40,40,255)',
+                    boxShadow:'dark-lg'
+                  }}
+                  onMouseEnter={() => handleMouseEnter(data2[1].id)}
+                  
+                  onMouseLeave={handleMouseLeave}
                 >
                   <Image w="10rem" src={data2[1].album.images[1].url} />
                   <Heading mt="1rem">{data2[1].album.name}</Heading>
@@ -211,6 +229,22 @@ const SearchPage = ({ action, debounce }) => {
                     </p>
                     <p>{data2[1].artists[2].name}</p>
                   </Flex>
+                  <Flex justifyContent="right">
+                     <IconButton
+                       position="absolute"
+                       borderRadius={30}
+                       variant="ghost"
+                       aria-label="Play"
+                       color="black"
+                       bg="green"
+                       icon={<FaPlay />}
+                       size="lg"
+                       opacity={isHovered == data2[1].id ? 1 : 0}
+                       transition="opacity 0.2s"
+                       transform="translate(-11px, -55px)"
+                     />
+                    
+                   </Flex>
                 </Box>
               </>
             )}
