@@ -56,21 +56,21 @@ function App() {
       // console.log("timestamp===>",diffTimestamp)
 
       if (diffTimestamp > 59) {
-        // dispatch(thunkActionCreator("token"));
+        dispatch(thunkActionCreator("token"));
       } else {
         dispatch(thunkActionCreator("oldToken", null, token));
         dispatch(thunkActionCreator("playlist", token.token));
 
         // dispatch(thunkActionCreator("oldToken"))
-        // dispatch(thunkActionCreator("playlist", token.token));
-        // dispatch(thunkActionCreator("searchResults", token.token));
+        dispatch(thunkActionCreator("playlist", token.token));
+        dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category", token.token));
         dispatch(
           thunkActionCreator("searchResults", token.token, null, debouncedText)
         );
       }
     } else if (token == null) {
-      // dispatch(thunkActionCreator("token"));
+      dispatch(thunkActionCreator("token"));
     }
   }, [token, debouncedText]);
 
@@ -85,9 +85,9 @@ function App() {
         {/* <LikePage/> */}
 
         {/* <Login/>  */}
-        {/* <SignUp/>  */}
+        <SignUp/> 
         {/* <Navbar/> */}
-        <AllRoutes />
+        {/* <AllRoutes /> */}
 
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}

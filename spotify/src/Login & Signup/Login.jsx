@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useToast } from '@chakra-ui/react'
 import {
   Img,
   Center,
@@ -14,6 +14,7 @@ import {
   Container,
   InputRightElement,
   InputGroup,
+  Heading
 } from "@chakra-ui/react";
 import { FaFacebook } from "react-icons/fa";
 import { AiFillApple } from "react-icons/ai";
@@ -24,30 +25,56 @@ import "./Login.css";
 const initial={
   email: "",
   password: "",
-  name: "",
-  year: "",
-  month: "",
-  day: "",
-  Confirmpassword:""
 }
 function Login(props) {
   let jsonData=JSON.parse(localStorage.getItem("userDetails"))
   // console.log(jsonData)
+  const toast = useToast()
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
-  const [state, setState] = useState([]);
+  // const [state, setState] = useState([]);
   const [users, setUsers] = useState({
     email: "",
     password: "",
   });
 
   let loginData = () => {
-    if(users.email===jsonData.email&&users.password===jsonData.password){
-          alert("wrong")
+    if(users.email==="" || users.password===""){
+      toast({
+        position: 'top-right',
+        title: 'Attention!.',
+        description: "Please fill all the fields!",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
     }else{
-      setState([...state, users]);
+  // setState([...state, users]);
+  let array=[...jsonData]
+    array=array.filter((elm)=>{
+      return elm.email===users.email && elm.password===users.password
+    })
+    if(array.length==0){
+      toast({
+        position: 'top-right',
+        title: 'user Not found!.',
+        description: "Please Regester now!",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }else{
+      toast({
+        position: 'top-right',
+        title: 'Login successfull!.',
+        description: "Enjoy now!",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
       setUsers(initial)
     }
+   }
   };
   return (
     <div>
@@ -62,7 +89,7 @@ function Login(props) {
       </Box>
       <div style={{ margin: "auto", marginBottom: "5rem", width: "30rem" }}>
         <Center>
-          <p style={{ marginTop: "15px" }}>To continue, log in to Spotify.</p>
+          <Heading fontSize="0.8rem" mt="3rem">To continue, log in to Spotify.</Heading>
         </Center>
         <div>
           <Box mb="1rem" mt="1rem">
@@ -129,6 +156,7 @@ function Login(props) {
             placeholder="Email Address or Username"
             size="sm"
             type="email"
+            value={users.email}
             onChange={(e) =>
               setUsers({
                 ...users,
@@ -150,6 +178,7 @@ function Login(props) {
               focusBorderColor="black"
               placeholder="Password"
               size="sm"
+              value={users.password}
               onChange={(e) =>
                 setUsers({
                   ...users,
