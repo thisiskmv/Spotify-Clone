@@ -25,12 +25,13 @@ import HeadGrid from "./SimpleGrid";
 import Footermain from "./Footermain";
 import { FaPlay } from "react-icons/fa";
 import { MyContext } from "../Components/context";
+import DynamicGrid from "./playlistgrid";
 
 const GridMain = () => {
   const [isHovered, setIsHovered] = useState(null);
   const { myState, toggle } = useContext(MyContext);
 
-  console.log("from grid",myState);
+  // console.log("from grid",myState);
  
   const handleOnChange = () => {
     toggle();
@@ -57,9 +58,10 @@ const GridMain = () => {
         <Box bg="rgb(29,29,29)">
           <HeadGrid />
          
-          <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
+          <Flex bg="rgb(29,29,29)" fontSize="2xl" mt='20px' as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Focus</Text>
           </Flex>
+          <DynamicGrid/>
 
           <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" >
             <GridItem  w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato"  />

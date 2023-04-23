@@ -1,4 +1,5 @@
-import React,{ useState } from "react";
+import React,{ useState, useContext } from "react";
+import { MyContext } from "../Components/context";
 import {
   Center,
   Card,
@@ -24,10 +25,13 @@ import {
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footermain=()=>{
+    const { myState, toggle } = useContext(MyContext);
     return <>
    
     <Flex p={2} bg='rgb(22,22,22)'  h='200px' gap={3} align=''>
-    <Box w='200px'>
+    <Box  w={myState ? "200px" : "75px"}
+    //  display={myState ? '':'none'}
+     >
 
     </Box>
     

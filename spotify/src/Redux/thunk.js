@@ -61,7 +61,9 @@ console.log(query)
             );
             let data = await response.json();
             dispatch(Playlists(data.playlists.items))
+
           
+
           }
         //  track................................................
           async function getTrack(dispatch,playlistID, TOKEN) {
@@ -162,8 +164,8 @@ console.log(query)
           }
           if(method==="playlist"){
             getPlaylists('party','11',TOKEN)
-            getPlaylists('rock','12',TOKEN)
-            getPlaylists(TOKEN);
+            // getPlaylists('rock','12',TOKEN)
+            // getPlaylists(TOKEN);
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query)

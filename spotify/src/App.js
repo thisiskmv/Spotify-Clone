@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import { Button, Text } from "@chakra-ui/react";
 // import './App.css';
 import { SpotifyHomepage } from "./Pages/Home";
+import UserProfile from "./Pages/Profile";
 
 import DetailsPage from "./Pages/DetailsPage";
 import LikePage from "./Pages/LikePage";
@@ -39,7 +40,8 @@ function App() {
     setMyState((prev)=>!prev);
   }
 
- 
+
+
   store.subscribe(() => {
     if(token==null){
 
@@ -107,8 +109,8 @@ function App() {
      <SearchPage action={setQuery} debounce={debouncedText}/>
 
       
-      <SpotifyHomepage/>
-      
+      {/* <SpotifyHomepage/> */}
+      <UserProfile/>
 
 
       {/* <SpotifyHomepage/> */}
