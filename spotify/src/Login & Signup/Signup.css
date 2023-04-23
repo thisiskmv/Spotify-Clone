@@ -1,20 +1,20 @@
-/* p:before{
+h5:before{
     content: "";
     width: 13rem;
     height: 2px;
     display: block;
-    background: rgba(128, 128, 128, 0.055);
+    background: rgba(128, 128, 128, 0.445);
     position: absolute;
-    top: 31.5%;
-    left: 27.2rem;
-}
-p:after{
+    top: 29%;
+    left: 37.5rem;
+} 
+h5:after{
     content: "";
     width: 13rem;
     height: 2px;
     display: block;
-    background: rgba(128, 128, 128, 0.055);
+    background: rgba(128, 128, 128, 0.418);
     position: absolute;
-    top: 31.5%;
-    right: 27.2rem;
-} */
+    top: 29%;
+    right: 37.5rem;
+} 

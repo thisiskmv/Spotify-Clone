@@ -33,6 +33,8 @@ const SpotifyHomepage = () => {
           justify="space-between"
           p="4"
           bg="rgb(16,16,16)"
+          position="sticky"
+          top="0"
         >
           <Box >
             {/* <Image

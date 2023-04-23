@@ -35,7 +35,7 @@ export default function Sidebar() {
   
   const { myState, toggle } = useContext(MyContext);
 
-  console.log("from side",myState);
+  // console.log("from side",myState);
  
   const handleOnChange = () => {
     toggle();
@@ -46,6 +46,7 @@ export default function Sidebar() {
   return (
     <Flex
       position="fixed"
+      zIndex={2}
       left={0}
       top={0}
       h="100%"
