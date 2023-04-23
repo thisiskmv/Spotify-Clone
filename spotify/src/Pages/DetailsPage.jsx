@@ -39,7 +39,7 @@ import {
 } from "@chakra-ui/react";
 import "../App.css";
 import AudioPlayer from "../Components/AudioPlayer";
-import {} from 'react-router-dom'
+import { } from 'react-router-dom'
  
 const obj1 = {
   collaborative: false,
