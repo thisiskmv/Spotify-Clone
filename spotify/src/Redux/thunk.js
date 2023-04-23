@@ -59,7 +59,9 @@ console.log(query)
             );
             let data = await response.json();
             dispatch(Playlists(data.playlists.items))
+
           
+
           }
         //  track................................................
           async function getTrack(dispatch,playlistID, TOKEN) {
