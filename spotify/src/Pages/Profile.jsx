@@ -155,7 +155,7 @@ const UserProfile=()=>{
                 <Text  mt={0}color='white' fontSize='6xl'  fontWeight="bold" >
                     User Name
                 </Text>
-                <Text color='white'>17 public libraries~3 followers~16F following</Text>
+                <Text color='white' fontSize='sm'>17 Public libraries ~ 3 Followers ~ 16 Following</Text>
             </Stack>
             </Flex>
             <Flex bg="rgb(29,29,29)"ml='10px'>
