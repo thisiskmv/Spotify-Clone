@@ -35,11 +35,19 @@ import {
   import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
   import {   BsThreeDots } from "react-icons/bs";
+import thunkActionCreator from "../Redux/thunk";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 
 const UserProfile=()=>{
+  let dispatch =useDispatch();
+  let navigate =useNavigate();
     const { myState, toggle } = useContext(MyContext);
     const [isHovered, setIsHovered] = useState(null);
+    let name =JSON.parse(localStorage.getItem("userDetails"))
+    name =name[0].name
     const Loggedin = true;
     const handleOnChange = () => {
         toggle();
@@ -56,6 +64,10 @@ const UserProfile=()=>{
       const handleMouseLeave = () => {
         setIsHovered();
       };
+
+      const logout =()=>{
+        console.log("==========loooo====")
+      }
     
     const play=data.slice(3, 10)
     return <>
@@ -115,7 +127,7 @@ const UserProfile=()=>{
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
                     Account
                   </MenuItem>
-                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={()=>navigate('/profile')} color="white" bg="rgba(40,40,40,255)">
                     Profile
                   </MenuItem>
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
@@ -125,7 +137,7 @@ const UserProfile=()=>{
                     Setting
                   </MenuItem>
                   <Divider />
-                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={()=>logout} color="white" bg="rgba(40,40,40,255)">
                     Log Out
                   </MenuItem>
                 </MenuList>
@@ -153,7 +165,7 @@ const UserProfile=()=>{
                     {/* Profile */}
                 </Text>
                 <Text  mt={0}color='white' fontSize='6xl'  fontWeight="bold" >
-                    User Name
+                    {name}
                 </Text>
                 <Text color='white' fontSize='sm'>17 Public libraries ~ 3 Followers ~ 16 Following</Text>
             </Stack>

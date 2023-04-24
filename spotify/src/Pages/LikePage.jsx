@@ -1,8 +1,23 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect,useContext } from "react";
 import { Icon } from "@chakra-ui/react";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart,AiOutlineLeft,AiOutlineRight  } from "react-icons/ai";
 import { MdOutlineMusicNote } from "react-icons/md";
 import {
+  
+  
+ 
+
+Avatar,
+  ButtonGroup,
+  Divider,
+  
+  VStack,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+  Spacer,
+  IconButton,
   Box,
   Image,
   Flex,
@@ -23,11 +38,23 @@ import {
 } from "@chakra-ui/react";
 import "../App.css";
 import AudioPlayer from "../Components/AudioPlayer";
+import Sidebar from "../Components/side";
+import Footermain from "./Footermain";
+import { MyContext } from "../Components/context";
+import {Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 const LikePage = () => {
   const [song, setSong] = useState([]);
   const [trackIndex, setTrackIndex] = useState(0);
+  let navigate =useNavigate();
   let toast = useToast();
+  const Loggedin = false;
+  const { myState, toggle } = useContext(MyContext);
+
+  const handleOnChange = () => {
+    toggle();
+  };
 
   useEffect(() => {
     setSong(JSON.parse(localStorage.getItem("liked")) || []);
@@ -51,8 +78,96 @@ const LikePage = () => {
   };
 
   return (
-    <div>
-      <Box>
+    <div style={{backgroundColor:"red"}}>
+     
+      <Sidebar />
+      
+      <Flex
+          alignItems="center"
+          // justify="space-between"
+          p="4"
+          bg="rgb(16,16,16)"
+          position="sticky"
+          top="0"
+        >
+          <Box w={myState ? "200px" : "75px"}></Box>
+          <ButtonGroup>
+            <IconButton
+              borderRadius={50}
+              bg="rgb(10,10,10)"
+              _hover={{ bg: "black", color: "white" }}
+              icon={
+                <AiOutlineLeft
+                  color="grey"
+                  size={20}
+                  _hover={{ bg: "black", color: "white" }}
+                />
+              }
+            />
+            <IconButton
+              borderRadius={50}
+              bg="rgb(10,10,10)"
+              _hover={{ bg: "black", color: "white" }}
+              icon={
+                <AiOutlineRight
+                  color="grey"
+                  size={20}
+                  _hover={{ bg: "black", color: "white" }}
+                />
+              }
+            />
+          </ButtonGroup>
+
+          <Spacer />
+          <Box left={0}>
+            {Loggedin ? (
+              <Menu color="white" bg="rgba(40,40,40,255)" mr='10px'>
+                <MenuButton>
+                  <Avatar
+                    size="md"
+                    name="User"
+                    src="https://bit.ly/dan-abramov"
+                  />
+                </MenuButton>
+                <MenuList
+                  bg="rgba(40,40,40,255)"
+                  color="white"
+                  border="0px solid grey"
+                >
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Account
+                  </MenuItem>
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Profile
+                  </MenuItem>
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Mark as Draft
+                  </MenuItem>
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Setting
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Log Out
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <ButtonGroup spacing={2}>
+                <Link to={'/signup'}><Button colorScheme="black" color="white" mr="2">
+                  Sign Up
+                </Button>
+                </Link>
+                <Link to="/login"><Button p={6} borderRadius="20px">
+                  Log In
+                </Button>
+                </Link>
+              </ButtonGroup>
+            )}
+          </Box>
+        </Flex>
+        
+      <Box width={'88.3%' } ml={'11.7%'} >
         <Box
           p={"32px 24px"}
           bg={"rgb(80, 56, 160)"}
@@ -83,9 +198,9 @@ const LikePage = () => {
             </Stack>
           </Flex>
         </Box>
-        <Box>
-          <Table colorScheme="facebook">
-            <Thead bg={"black"} pos={"sticky"} top={"0px"}>
+        <Box >
+          <Table colorScheme="facebook" >
+            <Thead bg={"black"} pos={"sticky"} top={"80px"}>
               <Tr>
                 <Th p={"8px 12px"} border={"0"} color={"white"}>
                   #
@@ -190,7 +305,7 @@ const LikePage = () => {
                   );
                 })
               ) : (
-                <Tr height={"50vh"}>
+                <Tr height={"60vh"}>
                   <Td colSpan={"6"} textAlign={"center"}>
                     <Flex direction={'column'} justify={'center'} alignItems={'center'} rowGap={'15px'} >
                       
@@ -199,7 +314,7 @@ const LikePage = () => {
                       Songs you like will appear here
                       </Heading>
                       <Text fontSize={'lg'}>Save songs by tapping the heart icon.</Text>
-                      <Button variant={'solid'} color={'black'} size={'lg'} borderRadius={'500px'} p={'12px 32px'} _hover={{transform:"scale(1.05)"}}>Find Songs</Button>
+                      <Button onClick={()=>navigate('/search')} variant={'solid'} color={'black'} size={'lg'} borderRadius={'500px'} p={'12px 32px'} _hover={{transform:"scale(1.05)"}}>Find Songs</Button>
                     </Flex>
                   </Td>
                 </Tr>
@@ -213,8 +328,11 @@ const LikePage = () => {
                         </Tr> */}
             </Tbody>
           </Table>
+          {/* <Footermain/> */}
         </Box>
       </Box>
+     
+
       {song.length > 0 && <AudioPlayer items={song} trackIndex={trackIndex} setTrackIndex={setTrackIndex} />}
     </div>
   );

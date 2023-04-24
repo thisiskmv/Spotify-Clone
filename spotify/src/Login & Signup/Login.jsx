@@ -21,14 +21,18 @@ import { AiFillApple } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { json, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import "./Login.css";
+import thunkActionCreator from "../Redux/thunk";
 const initial={
   email: "",
   password: "",
 }
 function Login(props) {
   let jsonData=JSON.parse(localStorage.getItem("userDetails"))
+  let dispatch =useDispatch();
   // console.log(jsonData)
+  let navigate =useNavigate();
   const toast = useToast()
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -72,7 +76,10 @@ function Login(props) {
         duration: 3000,
         isClosable: true,
       })
+      dispatch(thunkActionCreator("auth"))
       setUsers(initial)
+      navigate('/')
+
     }
    }
   };
@@ -227,7 +234,7 @@ function Login(props) {
           </h1>
 
           <Box mb="1rem" mt="1rem">
-            <Button
+            <Button onClick={()=>navigate('/signup')}
               bg="rgb(255,255,255)"
               color="black"
               p={6}

@@ -25,9 +25,11 @@ import {
   FiSettings,
 } from "react-icons/fi";
 import { VscLibrary } from "react-icons/vsc";
+import { AiFillHeart } from "react-icons/ai";
 import { MyContext } from "./context";
 
 import NavItem from "./item";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
@@ -73,7 +75,7 @@ export default function Sidebar() {
         </Box>
         {/* <BiLibrary/> */}
      
-        <IconButton
+        <Link to={'/'}> <IconButton
           background="none"
           mt={5}
           _hover={{ background: "none" }}
@@ -85,6 +87,7 @@ export default function Sidebar() {
             handleOnChange();
           }}
         />
+        </Link>
         <NavItem
           navSize={navSize}
           color="white"
@@ -93,8 +96,9 @@ export default function Sidebar() {
           description="This is the description for the dashboard."
         />
      
-        <NavItem navSize={navSize} icon={SearchIcon} title="Search" />
+        <NavItem  navSize={navSize} icon={SearchIcon} title="Search"  />
         <NavItem navSize={navSize} icon={VscLibrary} title="Your Library"/>
+        <NavItem navSize={navSize} icon={AiFillHeart} title="Liked Songs"/>
 
     
       </Flex>

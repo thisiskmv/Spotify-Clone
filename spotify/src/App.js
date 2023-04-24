@@ -77,15 +77,15 @@ function App() {
         dispatch(thunkActionCreator("playlist", token.token));
         dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category", token.token));
-        dispatch(
-          thunkActionCreator("searchResults", token.token, null, debouncedText)
-        );
+        // dispatch(
+        //   thunkActionCreator("searchResults", token.token, null, debouncedText)
+        // );
 
       }
     } else if (token == null) {
       dispatch(thunkActionCreator("token"));
     }
-  }, [token, debouncedText]);
+  }, [token]);
 
   return (
     <MyContext.Provider value={{ myState, toggle }}>
@@ -105,7 +105,7 @@ function App() {
       <AllRoutes/>
 
         {/* <Login/>  */}
-        <SignUp/> 
+        {/* <SignUp/>  */}
         {/* <Navbar/> */}
         {/* <AllRoutes /> */}
 
@@ -113,9 +113,10 @@ function App() {
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
 
-        <SpotifyHomepage/>
+        {/* <SpotifyHomepage/> */}
 
         {/* <SpotifyHomepage/> */}
+        {/* <UserProfile/> */}
       </div>
     </MyContext.Provider>
   );

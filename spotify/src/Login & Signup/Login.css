@@ -6,7 +6,7 @@ h6:before{
     background: rgba(128, 128, 128, 0.445);
     position: absolute;
     top: 28.9rem;
-    left: 32rem;
+    left: 37rem;
 }
 h6:after{
     content: "";
@@ -16,5 +16,5 @@ h6:after{
     background: rgba(128, 128, 128, 0.445);
     position: absolute;
     top: 28.9rem;
-    right: 32rem;
+    right: 37rem;
 }

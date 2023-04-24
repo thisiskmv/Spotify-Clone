@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
 import {
   Img,
@@ -25,6 +25,8 @@ import { FaFacebook } from "react-icons/fa";
 import { AiFillApple } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import "./Signup.css";
+import {useNavigate} from 'react-router-dom'
+import thunkActionCreator from "../Redux/thunk";
 const initial = {
   email: "",
   password: "",
@@ -36,7 +38,9 @@ const initial = {
 };
 
 function SignUp(props) {
-  let jsonData=JSON.parse(localStorage.getItem("userDetails"))
+  let navigate =useNavigate();
+  let dispatch = useDispatch()
+  let jsonData=JSON.parse(localStorage.getItem("userDetails")) || []
   let isAuth = useSelector((store) => {
     return store.isAuth;
   });
@@ -110,7 +114,7 @@ function SignUp(props) {
       setState([...state, userData]);
       console.log(state);
       setUserData(initial);
-      isAuth = true;
+      // isAuth = true;
       toast({
         position: "top-right",
         title: "Account Created.",
@@ -119,6 +123,8 @@ function SignUp(props) {
         duration: 3000,
         isClosable: true,
       });
+      dispatch(thunkActionCreator("auth"))
+      navigate('/')
     }
   }
   };
@@ -398,7 +404,7 @@ function SignUp(props) {
         </Center>
         <Center>
           <h1 style={{ marginTop: "1.2rem", marginBottom: "1.2rem" }}>
-            have an account? <span style={{ color: "blue" }}>Login</span>
+            have an account? <span onClick={()=>navigate('/login')} style={{ color: "blue" ,cursor:"pointer"}}>Login</span>
           </h1>
         </Center>
       </div>
