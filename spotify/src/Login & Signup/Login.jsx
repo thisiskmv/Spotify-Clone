@@ -73,7 +73,7 @@ function Login(props) {
         title: 'Login successfull!.',
         description: "Enjoy now!",
         status: 'success',
-        duration: 3000,
+        duration: 1000,
         isClosable: true,
       })
       dispatch(thunkActionCreator("auth"))
@@ -151,7 +151,7 @@ function Login(props) {
           </Box>
 
           <Center mt="2rem" mb="1rem">
-            <h6 style={{ fontSize: "1.4rem" }}>OR</h6>
+            <h6 className="divider-login" style={{ fontSize: "1.4rem" }}>OR</h6>
           </Center>
 
           <Text mb="8px">Email address or username</Text>

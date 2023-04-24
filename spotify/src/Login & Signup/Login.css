@@ -1,4 +1,4 @@
-h6:before{
+.divider-login:before{
     content: "";
     width: 13rem;
     height: 2px;
@@ -8,7 +8,7 @@ h6:before{
     top: 28.9rem;
     left: 37rem;
 }
-h6:after{
+.divider-login:after{
     content: "";
     width: 13rem;
     height: 2px;

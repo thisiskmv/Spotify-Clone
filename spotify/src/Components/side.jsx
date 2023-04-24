@@ -68,9 +68,11 @@ export default function Sidebar() {
       >
         <Box p={2} >
           <Image
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png"
+            // src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png"
+            src={myState ? "https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png" : "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Spotify_App_Logo.svg/1024px-Spotify_App_Logo.svg.png"}
             height="10"
-            display={myState ? "block":"none"}
+            // display={myState ? "block":"none"}
+            mt={'8px'}
           />
         </Box>
         {/* <BiLibrary/> */}

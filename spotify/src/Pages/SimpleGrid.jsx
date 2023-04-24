@@ -138,14 +138,14 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://i.scdn.co/image/ab6761610000e5eb33a4a7e4a1bf0aa584bbb02f"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+           Peaceful Guitar
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -251,7 +251,7 @@ console.log("for testing", play)
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+          Peaceful Piano
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -295,14 +295,14 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://i.scdn.co/image/ab67706f00000002698894ab14938696261d9cd5"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+           Hots Hits Hindi
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -346,14 +346,14 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://play-lh.googleusercontent.com/cLVnEMwBmZE_utXIAPJ4w6nRjviWTKplMxzyiUFrUTEnZMQ-CkHSBAi81NJFxoZc4yI"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+           Classical
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -397,14 +397,14 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
-           src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+           src="https://i.scdn.co/image/ab67616d0000b2735ca12e898fac5a6161fbf1df"
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Playlist One
+           Gym playlist
          </Text>
          <Spacer />
          <Flex justifyContent="right">
@@ -429,7 +429,7 @@ console.log("for testing", play)
  <Flex bg="rgb(29,29,29)" fontSize="2xl" mt='20px' as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Made for You</Text>
           </Flex>
- <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
+ <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" mr={'20px'}>
             <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
             
             {

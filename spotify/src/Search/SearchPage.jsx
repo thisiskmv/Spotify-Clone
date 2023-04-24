@@ -1,4 +1,10 @@
 import {
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+  Spacer,
+  Divider,
   Box,
   Flex,
   Button,
@@ -23,6 +29,9 @@ import {
   Td,
 } from "@chakra-ui/react";
 import { AiOutlineHeart } from "react-icons/ai";
+import {ChevronDownIcon} from '@chakra-ui/icons'
+import { BiUserCircle } from "react-icons/bi";
+import {Link,useNavigate} from 'react-router-dom'
 import { BiVolumeFull } from "react-icons/bi";
 
 import {
@@ -49,6 +58,7 @@ import AudioPlayer from "../Components/AudioPlayer";
 import SearchAudioPlayer from "../Components/SearchAudioPlayer";
 
 const SearchPage = () => {
+  let navigate =useNavigate()
   const [song, setSong] = useState([]);
   const [trackIndex, setTrackIndex] = useState(0);
   const { myState, toggle } = useContext(MyContext);
@@ -57,6 +67,7 @@ const SearchPage = () => {
   const [isHovered, setIsHovered] = useState(null);
   let dispatch =useDispatch();
   let token =JSON.parse(localStorage.getItem("spotify_token"))
+  const Loggedin =  useSelector((store)=>store.isAuth);
 
   const[text,action] =useState("")
 
@@ -67,6 +78,7 @@ const SearchPage = () => {
   //   // setData2(store.getState().searchResults)
   //   console.log(store.getState().searchResults)
   // })
+  let name =JSON.parse(localStorage.getItem("userDetails"))
   let toast = useToast();
   let [speech, setSpeech] = useState("");
   let [searchText, setSearchText] = useState("");
@@ -76,11 +88,15 @@ const SearchPage = () => {
     return store.CategoryPlaylists;
   });
 
+ 
+
   // const mana= data.splice(6, 1)  
   // console.log(data,"this is daata");
   let data2 = useSelector((store) => {
     return store.searchResults;
   });
+
+  
   console.log("====>",data2)
   let data3 = useSelector((store) => {
     return store.getPlaylists;
@@ -161,14 +177,53 @@ const SearchPage = () => {
         </InputGroup>
 
         <Box>
-          <ButtonGroup spacing={2}>
-            <Button colorScheme="black" color="white" mr="2">
-              Sign Up
-            </Button>
-            <Button p={6} borderRadius="20px">
-              Log In
-            </Button>
-          </ButtonGroup>
+        {Loggedin ? (
+              <Menu  color="white" bg="rgba(40,40,40,255)" mr='10px'>
+                <MenuButton as={Button}  _hover={{backgroundColor:'none'}} borderRadius={'50'} border={'1px solid green'} w={'14rem'} bg={'black'} color={'white'} fontSize={'2rem'} mr={'1rem'} leftIcon={<BiUserCircle/>} rightIcon={<ChevronDownIcon /> }>
+                  {/* <Avatar
+                    size="md"
+                    name="User"
+                    src="https://bit.ly/dan-abramov"
+                  /> */}
+                  <Heading as={'h5'} fontSize={'1rem'} noOfLines={'1'}  color={'white'} textTransform={'capitalize'}>{name[0].name}</Heading>
+                </MenuButton>
+                <MenuList
+                  bg="rgba(40,40,40,255)"
+                  color="white"
+                  border="0px solid grey"
+                >
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Account
+                  </MenuItem>
+                  <MenuItem onClick={() => {navigate('/profile')}}  color="white" bg="rgba(40,40,40,255)">
+                    Profile
+                  </MenuItem>
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Mark as Draft
+                  </MenuItem>
+                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                    Setting
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem onClick={() => {dispatch(thunkActionCreator("authfalse"));
+                          navigate('/')}} 
+                          color="white" bg="rgba(40,40,40,255)">
+                    Log Out
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <ButtonGroup spacing={2}>
+                <Link to={'/signup'}><Button colorScheme="black" color="white" mr="2">
+                  Sign Up
+                </Button>
+                </Link>
+                <Link to="/login"><Button p={6} borderRadius="20px">
+                  Log In
+                </Button>
+                </Link>
+              </ButtonGroup>
+            )}
         </Box>
       </Flex>
 
@@ -188,7 +243,8 @@ const SearchPage = () => {
         >
           {data.map((elm, i) => {
             return (
-              <div key={i} style={{boxShadow:"0 0 8px grey",borderRadius: "1rem"}}>
+              elm.id!="0JQ5DAqbMKFA6SOHvT3gck" &&
+                <div key={i} style={{boxShadow:"0 0 8px grey",borderRadius: "1rem"}}>
                 <img src={elm.icons[0].url} style={{ borderRadius: "1rem" }} />
 
                 <p
@@ -203,6 +259,8 @@ const SearchPage = () => {
                   {elm.name}
                 </p>
               </div>
+         
+              
             );
           })}
         </div>

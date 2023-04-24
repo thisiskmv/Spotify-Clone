@@ -161,7 +161,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
           async function getAllCategoryPlaylists(offset, limit, TOKEN) {
             let response = await fetch(
-              `https://api.spotify.com/v1/browse/categories?country=IN&offset=${offset}&limit=${limit}`,
+              `https://api.spotify.com/v1/browse/categories?country=IN&offset=${5}&limit=${limit}`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -201,7 +201,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==='category'){
             // getCategoryPlaylists( "15", "30", TOKEN)
-            getAllCategoryPlaylists("15", "36", TOKEN)
+            getAllCategoryPlaylists("15", "30", TOKEN)
           }
           if(method==='oldToken'){
             storeOldToken(oldToken)

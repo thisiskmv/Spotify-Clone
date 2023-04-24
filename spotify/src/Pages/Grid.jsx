@@ -1,6 +1,7 @@
 import React, { useState,useContext } from "react";
 import {
   Disclosure ,
+  HStack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -66,37 +67,44 @@ const GridMain = () => {
         onClose={onClose}
         isOpen={isOpen}
         motionPreset='slideInBottom'
-        size='xl' 
+        size='custom' 
       >
         <ModalOverlay />
-        <ModalContent bg='rgb(41,41,41)' p={3}  >
+        <ModalContent bg='rgb(41,41,41)' p={10} maxW="810px" maxH="480px" >
          
-          <ModalCloseButton color='white' />
+          <ModalCloseButton color='white' m={0} />
           <ModalBody p={3} m={4} color='#373737'>
            
-            <Flex >
+            <Flex spacing={6}>
              
             <Image
                     objectFit="cover"
-                    w='90%'
-                    src="https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+                    w='50%'
+                    src="https://i.scdn.co/image/ab67706f000000036caf8c414e0b49f1b5be3e91"
                     alt="hot hits"
-                    borderRadius={10}
+                    borderRadius={15}
                     p={2}
                   />
-                <Stack p={3} >
-                <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
-                  <Button onClick={()=>navigate('/login')} alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
-                  <Button onClick={()=>navigate('/signup')} w='90%' color='white' borderRadius={30} p={4}  variant='outline' >Log in</Button>           
+                <Stack p={6} >
+                  <Box  align="center"
+      justify="center" >
+                  <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
+
+                  </Box>
+                
+                    <VStack spacing={4} p={4}>
+                    <Button onClick={()=>navigate('/signup')} alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
+                  <Button onClick={()=>navigate('/login')} w='90%' color='white' _hover={{bg:"white",color:"black"}} borderRadius={30} p={4}  variant='outline' >Log in</Button>           
+                  </VStack>
+                  <Box  align="center"
+      justify="center">
+                    <Text  fontSize='sm' color='white'>Already have an Account?</Text>
+                    <Text as='b'  fontSize='sm'>  Download App</Text>
+                  </Box>
  </Stack>
             </Flex>
           </ModalBody>
-          {/* <ModalFooter>
-            <Button colorScheme='blue' variant='ghost' mt={10} mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter> */}
+        
         </ModalContent>
       </Modal>
       <Flex position='static'  h='100%'left={0}
@@ -113,7 +121,7 @@ const GridMain = () => {
           </Flex>
           <DynamicGrid/>
 
-          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" >
+          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" mr={'20px'}>
             <GridItem  w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato"  />
            <GridItem
               w="100%"
@@ -421,7 +429,7 @@ const GridMain = () => {
           <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Spotify Playlists</Text>
           </Flex>
-          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
+          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" mr={'20px'}>
             <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
             <GridItem
               w="100%"
@@ -748,7 +756,7 @@ const GridMain = () => {
           <Flex bg="rgb(29,29,29)" fontSize="2xl" as="b" ml={myState ? '240px': '20px'} p={3}>
             <Text color="white">Sound of India</Text>
           </Flex>
-          <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
+          <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" mr={'20px'}>
             <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
             <GridItem
               w="100%"

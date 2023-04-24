@@ -37,7 +37,9 @@ import {
   import {   BsThreeDots } from "react-icons/bs";
 import thunkActionCreator from "../Redux/thunk";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import {ChevronDownIcon} from '@chakra-ui/icons'
+import { BiUserCircle } from "react-icons/bi";
 
 
 
@@ -48,7 +50,7 @@ const UserProfile=()=>{
     const [isHovered, setIsHovered] = useState(null);
     let name =JSON.parse(localStorage.getItem("userDetails"))
     name =name[0].name
-    const Loggedin = true;
+    const Loggedin =  useSelector((store)=>store.isAuth);
     const handleOnChange = () => {
         toggle();
       };
@@ -111,13 +113,10 @@ const UserProfile=()=>{
           <Spacer />
           <Box left={0}>
             {Loggedin ? (
-              <Menu color="white" bg="rgba(40,40,40,255)" mr='10px'>
-                <MenuButton>
-                  <Avatar
-                    size="md"
-                    name="User"
-                    src="https://bit.ly/dan-abramov"
-                  />
+              <Menu  color="white" bg="rgba(40,40,40,255)" mr='10px'>
+                <MenuButton as={Button}  _hover={{backgroundColor:'none'}} borderRadius={'50'} border={'1px solid green'} w={'14rem'} bg={'black'} color={'white'} fontSize={'2rem'} mr={'1rem'} leftIcon={<BiUserCircle/>} rightIcon={<ChevronDownIcon /> }>
+                 
+                  <Heading as={'h5'} fontSize={'1rem'} noOfLines={'1'}  color={'white'} textTransform={'capitalize'}>{name}</Heading>
                 </MenuButton>
                 <MenuList
                   bg="rgba(40,40,40,255)"
@@ -127,7 +126,7 @@ const UserProfile=()=>{
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
                     Account
                   </MenuItem>
-                  <MenuItem onClick={()=>navigate('/profile')} color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {navigate('/profile')}}  color="white" bg="rgba(40,40,40,255)">
                     Profile
                   </MenuItem>
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
@@ -137,34 +136,38 @@ const UserProfile=()=>{
                     Setting
                   </MenuItem>
                   <Divider />
-                  <MenuItem onClick={()=>logout} color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {dispatch(thunkActionCreator("authfalse"));
+                          navigate('/')}} 
+                          color="white" bg="rgba(40,40,40,255)">
                     Log Out
                   </MenuItem>
                 </MenuList>
               </Menu>
             ) : (
               <ButtonGroup spacing={2}>
-                <Button colorScheme="black" color="white" mr="2">
+                <Link to={'/signup'}><Button colorScheme="black" color="white" mr="2">
                   Sign Up
                 </Button>
-                <Button p={6} borderRadius="20px">
+                </Link>
+                <Link to="/login"><Button p={6} borderRadius="20px">
                   Log In
                 </Button>
+                </Link>
               </ButtonGroup>
             )}
           </Box>
         </Flex>
         <Box ml={myState ? '200px':'75px'} bg="rgb(29,29,29)">
-            <Flex bg="rgb(29,29,29)">
+            <Flex bg="rgb(29,29,29)" >
                 <Box p={10}>
-                    <Avatar  size='2xl'/>
+                    <Avatar mt={'1rem'} size='2xl'/>
                 </Box>
                 
                 <Stack align="flex-start" p={3}>
                 <Text color='white' mb={0}>
                     {/* Profile */}
                 </Text>
-                <Text  mt={0}color='white' fontSize='6xl'  fontWeight="bold" >
+                <Text  mt={0}color='white' fontSize={'7rem'}  fontWeight="bold" >
                     {name}
                 </Text>
                 <Text color='white' fontSize='sm'>17 Public libraries ~ 3 Followers ~ 16 Following</Text>

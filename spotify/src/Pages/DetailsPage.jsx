@@ -55,14 +55,20 @@ import { } from 'react-router-dom'
 import Sidebar from "../Components/side";
 import { MyContext } from "../Components/context";
 import {Link} from 'react-router-dom'
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import store from "../Redux/store";
+import thunkActionCreator from "../Redux/thunk";
+import {useDispatch,useSelector } from "react-redux";
+import {ChevronDownIcon} from '@chakra-ui/icons'
+import { BiUserCircle } from "react-icons/bi";
+import {useNavigate} from 'react-router-dom'
  
 // let obj ={};
 // let items =[];
 // let Loggedin = false;
 
 const DetailsPage = () => {
+  let navigate =useNavigate()
   const { myState, toggle } = useContext(MyContext);
   const [Loggedin, setLoggedIn] = useState(false);
   const [liked, setLike] = useState([]);
@@ -72,6 +78,9 @@ const DetailsPage = () => {
   const[items,setItems] =useState()
   const [trackIndex, setTrackIndex] = useState(0);
   let toast = useToast();
+
+  let dispatch =useDispatch();
+  let name =JSON.parse(localStorage.getItem("userDetails"))
 
   store.subscribe(()=>{
     setItems(store.getState().getDetailsPlaylist.tracks.items);
@@ -142,13 +151,14 @@ console.log("------------>",items);
           <Spacer />
           <Box left={0}>
             {Loggedin ? (
-              <Menu color="white" bg="rgba(40,40,40,255)" mr='10px'>
-                <MenuButton>
-                  <Avatar
+              <Menu  color="white" bg="rgba(40,40,40,255)" mr='10px'>
+                <MenuButton as={Button}  _hover={{backgroundColor:'none'}} borderRadius={'50'} border={'1px solid green'} w={'14rem'} bg={'black'} color={'white'} fontSize={'2rem'} mr={'1rem'} leftIcon={<BiUserCircle/>} rightIcon={<ChevronDownIcon /> }>
+                  {/* <Avatar
                     size="md"
                     name="User"
                     src="https://bit.ly/dan-abramov"
-                  />
+                  /> */}
+                  <Heading as={'h5'} fontSize={'1rem'} noOfLines={'1'}  color={'white'} textTransform={'capitalize'}>{name[0].name}</Heading>
                 </MenuButton>
                 <MenuList
                   bg="rgba(40,40,40,255)"
@@ -158,7 +168,7 @@ console.log("------------>",items);
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
                     Account
                   </MenuItem>
-                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {navigate('/profile')}}  color="white" bg="rgba(40,40,40,255)">
                     Profile
                   </MenuItem>
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
@@ -168,7 +178,9 @@ console.log("------------>",items);
                     Setting
                   </MenuItem>
                   <Divider />
-                  <MenuItem  color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {dispatch(thunkActionCreator("authfalse"));
+                          navigate('/')}} 
+                          color="white" bg="rgba(40,40,40,255)">
                     Log Out
                   </MenuItem>
                 </MenuList>
@@ -223,7 +235,7 @@ console.log("------------>",items);
         </Box>
         <Box>
           <Table colorScheme="facebook">
-            <Thead bg={"black"} pos={"sticky"} top={"80px"}>
+            <Thead bg={"black"} pos={"sticky"} top={"72px"}>
               <Tr>
                 <Th p={"8px 12px"} border={"0"} color={"white"}>
                   #
