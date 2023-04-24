@@ -1,4 +1,4 @@
-h5:before{
+.divider-signup:before{
     content: "";
     width: 13rem;
     height: 2px;
@@ -8,7 +8,7 @@ h5:before{
     top: 27.5%;
     left: 37rem;
 } 
-h5:after{
+.divider-signup:after{
     content: "";
     width: 13rem;
     height: 2px;

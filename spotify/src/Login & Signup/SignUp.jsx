@@ -178,7 +178,7 @@ function SignUp(props) {
         </Center>
 
         <Center mt="1rem">
-          <h5 style={{ fontSize: "1.4rem" }}>OR</h5>
+          <h6 className="divider-signup" style={{ fontSize: "1.4rem" }}>OR</h6>
         </Center>
 
         <div style={{ marginTop: "2rem" }}>

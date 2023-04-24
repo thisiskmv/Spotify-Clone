@@ -24,7 +24,9 @@ import {
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
+  useToast
 } from "@chakra-ui/react";
+import {useSelector} from 'react-redux'
 
 const SearchAudioPlayer = ({items,trackIndex,setTrackIndex}) => {
 
@@ -34,7 +36,8 @@ const SearchAudioPlayer = ({items,trackIndex,setTrackIndex}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const[volume,setVolume] =useState(30);
   
-   
+    let isAuth =useSelector((store)=>store.isAuth);
+    let toast = useToast();
   
     // Refs
     
@@ -199,7 +202,17 @@ const SearchAudioPlayer = ({items,trackIndex,setTrackIndex}) => {
                     color={"gray"}
                     boxSize={"32px"}
                     _hover={{ color: "white" }}
-                    onClick={()=>toPrevTrack()}
+                    onClick={()=>{ if(isAuth){
+                       
+                      toPrevTrack()
+                      }else{
+                        toast({
+                                title: "Can't play without login/register" ,
+                                description: "Please login first",
+                                status: "error",
+                                duration: 2000,
+                              });
+                      }}}
                   />
                   <Icon
                     as={
@@ -210,14 +223,36 @@ const SearchAudioPlayer = ({items,trackIndex,setTrackIndex}) => {
                     color={"white"}
                     boxSize={"42px"}
                     _hover={{ transform: "scale(1.08)" }}
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={() =>{
+                      if(isAuth){
+                       setIsPlaying(!isPlaying)
+                       
+                      }else{
+                        toast({
+                                title: "Can't play without login/register" ,
+                                description: "Please login first",
+                                status: "error",
+                                duration: 2000,
+                              });
+                      }
+                      
+                    }}
                   />
                   <Icon
                     as={MdSkipNext}
                     color={"gray"}
                     boxSize={"32px"}
                     _hover={{ color: "white" }}
-                    onClick={()=>toNextTrack()}
+                    onClick={()=>{ if(isAuth){
+                      toNextTrack()
+                      }else{
+                        toast({
+                                title: "Can't play without login/register" ,
+                                description: "Please login first",
+                                status: "error",
+                                duration: 2000,
+                              });
+                      }}}
                   />
                 </ButtonGroup>
               </Flex>

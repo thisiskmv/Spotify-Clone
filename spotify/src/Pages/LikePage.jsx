@@ -43,13 +43,19 @@ import Footermain from "./Footermain";
 import { MyContext } from "../Components/context";
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
+import thunkActionCreator from "../Redux/thunk";
+import {useDispatch,useSelector } from "react-redux";
+import {ChevronDownIcon} from '@chakra-ui/icons'
+import { BiUserCircle } from "react-icons/bi";
 
 const LikePage = () => {
   const [song, setSong] = useState([]);
   const [trackIndex, setTrackIndex] = useState(0);
   let navigate =useNavigate();
   let toast = useToast();
-  const Loggedin = false;
+  let dispatch =useDispatch();
+  let name =JSON.parse(localStorage.getItem("userDetails"))
+  const Loggedin =  useSelector((store)=>store.isAuth);
   const { myState, toggle } = useContext(MyContext);
 
   const handleOnChange = () => {
@@ -78,7 +84,7 @@ const LikePage = () => {
   };
 
   return (
-    <div style={{backgroundColor:"red"}}>
+    <Box>
      
       <Sidebar />
       
@@ -121,13 +127,14 @@ const LikePage = () => {
           <Spacer />
           <Box left={0}>
             {Loggedin ? (
-              <Menu color="white" bg="rgba(40,40,40,255)" mr='10px'>
-                <MenuButton>
-                  <Avatar
+              <Menu  color="white" bg="rgba(40,40,40,255)" mr='10px'>
+                <MenuButton as={Button}  _hover={{backgroundColor:'none'}} borderRadius={'50'} border={'1px solid green'} w={'14rem'} bg={'black'} color={'white'} fontSize={'2rem'} mr={'1rem'} leftIcon={<BiUserCircle/>} rightIcon={<ChevronDownIcon /> }>
+                  {/* <Avatar
                     size="md"
                     name="User"
                     src="https://bit.ly/dan-abramov"
-                  />
+                  /> */}
+                  <Heading as={'h5'} fontSize={'1rem'} noOfLines={'1'}  color={'white'} textTransform={'capitalize'}>{name[0].name}</Heading>
                 </MenuButton>
                 <MenuList
                   bg="rgba(40,40,40,255)"
@@ -137,7 +144,7 @@ const LikePage = () => {
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
                     Account
                   </MenuItem>
-                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {navigate('/profile')}}  color="white" bg="rgba(40,40,40,255)">
                     Profile
                   </MenuItem>
                   <MenuItem color="white" bg="rgba(40,40,40,255)">
@@ -147,7 +154,9 @@ const LikePage = () => {
                     Setting
                   </MenuItem>
                   <Divider />
-                  <MenuItem color="white" bg="rgba(40,40,40,255)">
+                  <MenuItem onClick={() => {dispatch(thunkActionCreator("authfalse"));
+                          navigate('/')}} 
+                          color="white" bg="rgba(40,40,40,255)">
                     Log Out
                   </MenuItem>
                 </MenuList>
@@ -200,7 +209,7 @@ const LikePage = () => {
         </Box>
         <Box >
           <Table colorScheme="facebook" >
-            <Thead bg={"black"} pos={"sticky"} top={"80px"}>
+            <Thead bg={"black"} pos={"sticky"} top={"72px"}>
               <Tr>
                 <Th p={"8px 12px"} border={"0"} color={"white"}>
                   #
@@ -328,13 +337,13 @@ const LikePage = () => {
                         </Tr> */}
             </Tbody>
           </Table>
-          {/* <Footermain/> */}
+          <Box bg={'#121212'} h={'40vh'}></Box>
         </Box>
       </Box>
      
 
       {song.length > 0 && <AudioPlayer items={song} trackIndex={trackIndex} setTrackIndex={setTrackIndex} />}
-    </div>
+    </Box>
   );
 };
 
