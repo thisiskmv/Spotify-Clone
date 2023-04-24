@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   useBoolean,
   Flex,
@@ -28,12 +28,17 @@ import { VscLibrary } from "react-icons/vsc";
 import { AiFillHeart } from "react-icons/ai";
 import { MyContext } from "./context";
 
+
 import NavItem from "./item";
 import { Link } from "react-router-dom";
+
+import { useBreakpointValue } from "@chakra-ui/react";
+import { extendTheme } from '@chakra-ui/react'
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   // const [isOpen, setIsOpen] = useState(true);
+  
   
   const { myState, toggle } = useContext(MyContext);
 
@@ -43,7 +48,38 @@ export default function Sidebar() {
     toggle();
   };
  
+  // const breakpoints = {
+  //   sm: '320px',
+  //   md: '768px',
+  //   lg: '960px',
+  //   xl: '1200px',
+  //   '2xl': '1536px',
+  // }
 
+  // const theme = extendTheme({ breakpoints })
+  const shouldDisplaySidebar = useBreakpointValue({sm:'sm',md:'md',lg:'lg'});
+  useEffect(()=>{
+    if(shouldDisplaySidebar==='sm'){
+      toggle();
+      changeNavSize("small");
+     
+    }
+    if(shouldDisplaySidebar==='lg'){
+      // toggle();
+      changeNavSize("large");
+      // toggle();
+    }
+    if(shouldDisplaySidebar==='md'){
+      changeNavSize("large");
+      // toggle();
+    }
+    
+    console.log("from use effect",navSize);
+    
+  },[shouldDisplaySidebar]) 
+
+
+ 
 
   return (
     <Flex
@@ -54,7 +90,9 @@ export default function Sidebar() {
       h="100%"
       w={navSize == "small" ? "75px" : "200px"}
       // boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-
+    //  w={ shouldDisplaySidebar? "": "75px"}
+    // w={{base:'200px%',md:}}
+    //  w={{md:changeNavSize("small")}}
       flexDir="column"
       justifyContent="space-between"
       bg="rgb(0,0,0)"

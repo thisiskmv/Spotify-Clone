@@ -1,6 +1,7 @@
 import React, { useState,useContext } from "react";
 import {
   Disclosure ,
+  HStack,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -36,11 +37,14 @@ import { FaPlay } from "react-icons/fa";
 import { MyContext } from "../Components/context";
 import DynamicGrid from "./playlistgrid";
 import { useNavigate } from "react-router-dom";
+import { useBreakpointValue } from "@chakra-ui/react";
+import { extendTheme } from '@chakra-ui/react'
 
 const GridMain = () => {
   const [isHovered, setIsHovered] = useState(null);
   const { myState, toggle } = useContext(MyContext);
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const shouldDisplaySidebar = useBreakpointValue({ base: false, md: true });
   let navigate =useNavigate();
 
   // console.log("from grid",myState);
@@ -58,6 +62,17 @@ const GridMain = () => {
   const handleMouseLeave = () => {
     setIsHovered();
   };
+
+  const breakpoints = {
+    sm: '320px',
+    md: '768px',
+    lg: '960px',
+    xl: '1200px',
+    '2xl': '1536px',
+  }
+  
+  // 3. Extend the theme
+  const theme = extendTheme({ breakpoints });
   return (
     <>
       <Flex bg='rgb(29,29,29)'>
@@ -66,28 +81,40 @@ const GridMain = () => {
         onClose={onClose}
         isOpen={isOpen}
         motionPreset='slideInBottom'
-        size='xl' 
+        size='custom' 
       >
         <ModalOverlay />
-        <ModalContent bg='rgb(41,41,41)' p={3}  >
+        <ModalContent bg='rgb(41,41,41)' p={10} maxW="810px" maxH="480px" >
          
-          <ModalCloseButton color='white' />
+          <ModalCloseButton color='white' m={0} />
           <ModalBody p={3} m={4} color='#373737'>
            
-            <Flex >
+            <Flex spacing={6}>
              
             <Image
                     objectFit="cover"
-                    w='90%'
-                    src="https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+                    w='50%'
+                    src="https://i.scdn.co/image/ab67706f000000036caf8c414e0b49f1b5be3e91"
                     alt="hot hits"
-                    borderRadius={10}
+                    borderRadius={15}
                     p={2}
                   />
-                <Stack p={3} >
-                <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
-                  <Button onClick={()=>navigate('/login')} alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
+                <Stack p={6} >
+                  <Box  align="center"
+      justify="center" >
+                  <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
+
+                  </Box>
+                
+                    <VStack spacing={4} p={4}>
+                    <Button onClick={()=>navigate('/login')} alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
                   <Button onClick={()=>navigate('/signup')} w='90%' color='white' borderRadius={30} p={4}  variant='outline' >Log in</Button>           
+                  </VStack>
+                  <Box  align="center"
+      justify="center">
+                    <Text  fontSize='sm' color='white'>Already have an Account?</Text>
+                    <Text as='b'  fontSize='sm'>  Download App</Text>
+                  </Box>
  </Stack>
             </Flex>
           </ModalBody>
@@ -108,8 +135,11 @@ const GridMain = () => {
           </Flex>
           <DynamicGrid/>
 
-          <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)" >
-            <GridItem  w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato"  />
+          <Grid
+           templateColumns="repeat(7 , 1fr)"
+            // templateColumns={{base:"repeat(7 , 1fr)",sm:"repeat(3, 1fr)"}}
+          gap={3} bg="rgb(29,29,29)" >
+            <GridItem  w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5}bg='rgb(29,29,29)' />
            <GridItem
               w="100%"
               bg="rgb(22,22,22)"
@@ -128,7 +158,7 @@ const GridMain = () => {
                   <Box>
                     <Image
                       objectFit="cover"
-                      maxW={{ base: "100%", sm: "200px" }}
+                      maxW={{ base: "100%", sm: "200px"  }}
                       src="https://i.scdn.co/image/ab67706f000000030776a5b5a70f372747584c2b"
                       alt="hot hits"
                       borderRadius={10}
@@ -417,7 +447,7 @@ const GridMain = () => {
             <Text color="white">Spotify Playlists</Text>
           </Flex>
           <Grid templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
-            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
+            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg='rgb(29,29,29)' />
             <GridItem
               w="100%"
               bg="rgb(22,22,22)"
@@ -744,7 +774,7 @@ const GridMain = () => {
             <Text color="white">Sound of India</Text>
           </Flex>
           <Grid  templateColumns="repeat(7 , 1fr)" gap={3} bg="rgb(29,29,29)">
-            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg="tomato" />
+            <GridItem   w={myState ?'200px':'75px'} display={myState ? '':'none'} rowSpan={5} bg='rgb(29,29,29)' />
             <GridItem
               w="100%"
               bg="rgb(22,22,22)"
