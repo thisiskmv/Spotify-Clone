@@ -19,9 +19,6 @@ https://spotify-two-virid.vercel.app/
 
 ## Screenshots
 
-Home page
-
-![Home](https://i.postimg.cc/B6vyQH18/Screenshot-2023-04-24-232247.png)
 
 Home page after user login
 
