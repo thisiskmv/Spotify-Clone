@@ -397,14 +397,18 @@ console.log("for testing", play)
          <Image
            objectFit="cover"
            // maxW={{ base: "80%", sm: "200px" }}
+
            src="https://i.scdn.co/image/ab67616d0000b2735ca12e898fac5a6161fbf1df"
+
            alt="hot hits"
            borderRadius={10}
            // h='20%'
            w="15%"
          />
          <Text ml="20px" as="b" color="white">
-           Gym playlist
+
+           Gym Playlist
+
          </Text>
          <Spacer />
          <Flex justifyContent="right">
