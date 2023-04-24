@@ -105,7 +105,7 @@ function App() {
       <AllRoutes/>
 
         {/* <Login/>  */}
-        {/* <SignUp/>  */}
+        <SignUp/> 
         {/* <Navbar/> */}
         {/* <AllRoutes /> */}
 
@@ -113,10 +113,7 @@ function App() {
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
 
-        {/* <SpotifyHomepage/> */}
-
-        {/* <SpotifyHomepage/> */}
-        {/* <UserProfile/> */}
+        <SpotifyHomepage />
       </div>
     </MyContext.Provider>
   );
