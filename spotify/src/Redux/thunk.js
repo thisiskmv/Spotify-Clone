@@ -14,9 +14,10 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
 
-function thunkActionCreator(method,TOKEN,oldToken,query) {
 
-console.log(query)
+
+ function thunkActionCreator(method,TOKEN,oldToken,query,playlist_id) {
+
     return (dispatch,getState)=>{
 
 
@@ -58,11 +59,36 @@ console.log(query)
               }
             );
             let data = await response.json();
+            // console.log(data);
             dispatch(Playlists(data.playlists.items))
 
           
 
           }
+
+          // search playlist
+
+          async function getDetailsPlaylists(playlist_id, limit, TOKEN) {
+
+            let response = await fetch(
+              `https://api.spotify.com/v1/playlists/${playlist_id}?country=IN&limit=20`,
+              {
+                headers: {
+                  Authorization: `Bearer ${TOKEN}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            let data = await response.json();
+            console.log(data);
+            dispatch({type:"detailsplaylist",payload:data})
+
+          
+
+          }
+
+          // search playlist
+
         //  track................................................
           async function getTrack(dispatch,playlistID, TOKEN) {
             let res = await fetch(
@@ -149,6 +175,13 @@ console.log(query)
             // return data.playlists.items;
           }
 
+          const setIsAuth =()=>{
+            dispatch({type:"auth",payload:true})
+          }
+          const setIsAuthFalse =()=>{
+            dispatch({type:"authfalse",payload:false})
+          }
+
 
 
 
@@ -156,7 +189,11 @@ console.log(query)
             getData(dispatch) 
           }
           if(method==="playlist"){
+
+            // getPlaylists(playlist_id,'14',TOKEN)
+
             getPlaylists('bollywood','18',TOKEN)
+
           }
           if(method==='searchResults'){
             getAllSearchResults(TOKEN,query,5)
@@ -172,7 +209,16 @@ console.log(query)
           if(method==='album'){
             getAlbumTrack(TOKEN)
           }
+          if(method==='detailsPlaylist'){
+            getDetailsPlaylists(playlist_id,null,TOKEN)
+          }
+          if(method =="auth"){
+            setIsAuth()
+          }
+          if(method =="authfalse"){
+            setIsAuthFalse()
+          }
     }
     
   }
-  export default thunkActionCreator
+  export default thunkActionCreator;

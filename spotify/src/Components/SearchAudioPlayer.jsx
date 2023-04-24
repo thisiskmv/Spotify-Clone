@@ -1,3 +1,7 @@
+import React from 'react'
+
+
+
 import {useState,useEffect,useRef} from "react";
 
 import { BiVolumeFull,BiVolumeMute } from "react-icons/bi";
@@ -22,7 +26,9 @@ import {
   SliderTrack,
 } from "@chakra-ui/react";
 
-const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
+const SearchAudioPlayer = ({items,trackIndex,setTrackIndex}) => {
+
+    console.log("from search audio player===",items,trackIndex)
     
     const [trackProgress, setTrackProgress] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -33,7 +39,7 @@ const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
     // Refs
     
 
-    const audioRef = useRef(new Audio(items[trackIndex].track.preview_url));
+    const audioRef = useRef(new Audio(items[trackIndex].preview_url));
     
     const intervalRef = useRef();
     const isReady = useRef(false);
@@ -101,7 +107,7 @@ const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
     useEffect(() => {
       audioRef.current.pause();
   
-      audioRef.current = new Audio(items[trackIndex].track.preview_url);
+      audioRef.current = new Audio(items[trackIndex].preview_url);
       setTrackProgress(audioRef.current.currentTime);
   
       if (isReady.current) {
@@ -154,7 +160,7 @@ const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
           <Box flex={"1"} className="leftContainer">
             <Flex alignItems={"center"}>
               <Image
-                src={items[trackIndex].track.album.images[2].url}
+                src={items[trackIndex].album.images[2].url}
                 w={"56px"}
                 h={"56px"}
                 mr={"16px"}
@@ -166,14 +172,14 @@ const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
                   noOfLines={1}
                   _hover={{ textDecoration: "underline" }}
                 >
-                  {items[trackIndex].track.name}
+                  {items[trackIndex].name}
                 </Heading>
                 <Text
                   fontSize={"xs"}
                   noOfLines={1}
                   _hover={{ textDecoration: "underline" }}
                 >
-                  {items[trackIndex].track.artists
+                  {items[trackIndex].artists
                     .map((e) => e.name)
                     .join(", ")}
                 </Text>
@@ -279,4 +285,4 @@ const AudioPlayer = ({items,trackIndex,setTrackIndex}) => {
   );
 };
 
-export default AudioPlayer;
+export default SearchAudioPlayer;

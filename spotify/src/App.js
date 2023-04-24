@@ -62,17 +62,30 @@ function App() {
         dispatch(thunkActionCreator("playlist", token.token));
 
         // dispatch(thunkActionCreator("oldToken"))
+
+        // dispatch(thunkActionCreator("playlist", token.token));
+        // dispatch(thunkActionCreator("searchResults", token.token));
+        // dispatch(thunkActionCreator("category", token.token));
+        // dispatch(
+        //   thunkActionCreator("searchResults", token.token, null, debouncedText)
+        // );
+        dispatch(thunkActionCreator("category",token.token))
+        // dispatch(thunkActionCreator("searchResults",token.token,debouncedText))
+       
+
+
         dispatch(thunkActionCreator("playlist", token.token));
         dispatch(thunkActionCreator("searchResults", token.token));
         dispatch(thunkActionCreator("category", token.token));
-        dispatch(
-          thunkActionCreator("searchResults", token.token, null, debouncedText)
-        );
+        // dispatch(
+        //   thunkActionCreator("searchResults", token.token, null, debouncedText)
+        // );
+
       }
     } else if (token == null) {
       dispatch(thunkActionCreator("token"));
     }
-  }, [token, debouncedText]);
+  }, [token]);
 
   return (
     <MyContext.Provider value={{ myState, toggle }}>
@@ -82,12 +95,20 @@ function App() {
 
         {/* <LikePage/> */}
 
-        {/* <LikePage/> */}
+      {/* <LikePage/> */}
+
+
+
+      {/* <Login/>  */}
+      {/* <SignUp/>  */}
+      {/* <Navbar/> */}
+      <AllRoutes/>
 
         {/* <Login/>  */}
-        {/* <SignUp/>  */}
+        <SignUp/> 
         {/* <Navbar/> */}
         {/* <AllRoutes /> */}
+
 
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}

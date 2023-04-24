@@ -28,23 +28,31 @@ import {
 } from "@chakra-ui/react";
 import { MyContext } from "../Components/context";
 import { SlHeart } from "react-icons/sl";
+import {useDispatch} from 'react-redux'
+import thunkActionCreator from "../Redux/thunk";
+import { useNavigate } from "react-router-dom";
 
 
 const HeadGrid = () => {
   const [isHovered, setIsHovered] = useState(null);
   const { myState, toggle } = useContext(MyContext);
+  let dispatch =useDispatch();
+  let navigate =useNavigate()
+  let token =JSON.parse(localStorage.getItem("spotify_token"))
 
-  const Loggedin = true;
+  const Loggedin = useSelector((store)=>store.isAuth);
 
   // useEffect(()=>{
   
   // },[])
+  
   let data=useSelector((store)=>{
     return store.getPlaylists
 })
 
 const play=data.slice(0, 6)
 
+console.log("=====playdata==>",data)
   // data for playlist
  
 console.log("for playlist",play)
@@ -71,6 +79,11 @@ console.log("for testing", play)
   const handleMouseLeave = () => {
     setIsHovered();
   };
+
+  const handleClick =(id)=>{
+      dispatch(thunkActionCreator("detailsPlaylist",token.token,null,null,id))
+      navigate("/playlist")
+  }
 
  
   const numRows = 2;
@@ -456,6 +469,7 @@ console.log("for testing", play)
           }
            <Flex justifyContent="right">
                       <IconButton
+                        onClick={()=>{handleClick(item.id)}}
                         position="absolute"
                         borderRadius={30}
                         variant="ghost"

@@ -5,6 +5,7 @@ let initial={
         time:""
     },
     getPlaylists:[],
+    getDetailsPlaylist:{},
     getTrack:[],
     getAlbumTrack:[],
     searchResults:[],
@@ -15,8 +16,14 @@ let reducer=(state=initial,action)=>{
     switch(action.type){
         case 'playlist':
             return {...state,getPlaylists: action.payload}
+        case 'detailsplaylist':
+            return {...state,getDetailsPlaylist: action.payload}
         case 'token':
             return {...state,token: {toke: action.payload,time:new Date().getTime()}}
+        case 'auth':
+            return {...state,isAuth:action.payload}
+        case 'authfalse':
+            return {...state,isAuth:action.payload}
         case 'oldToken':
              return {...state,token :{toke:action.payload.token, time:action.payload.timestamp}}
 
