@@ -85,16 +85,14 @@ function App() {
         {/* <LikePage/> */}
 
         {/* <Login/>  */}
-        <SignUp/> 
+        {/* <SignUp/>  */}
         {/* <Navbar/> */}
         {/* <AllRoutes /> */}
 
         {/* <SearchPage action={setQuery} debounce={debouncedText}/> */}
         {/* <Dictaphone/> */}
 
-        <SpotifyHomepage/>
-
-        {/* <SpotifyHomepage/> */}
+        <SpotifyHomepage />
       </div>
     </MyContext.Provider>
   );
