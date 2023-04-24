@@ -47,10 +47,10 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
 
 
           // playlists////////////////////////////////////
-          async function getPlaylists(playlist_id, limit, TOKEN) {
+          async function getPlaylists(category, limit, TOKEN) {
 
             let response = await fetch(
-              `https://api.spotify.com/v1/playlists/37i9dQZF1DWXtlo6ENS92N?country=IN`,
+              `https://api.spotify.com/v1/browse/categories/${category}/playlists?country=IN&offset=5&limit=${limit}`,
               {
                 headers: {
                   Authorization: `Bearer ${TOKEN}`,
@@ -60,11 +60,35 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             );
             let data = await response.json();
             // console.log(data);
-            dispatch(Playlists(data))
+            dispatch(Playlists(data.playlists.items))
 
           
 
           }
+
+          // search playlist
+
+          async function getDetailsPlaylists(playlist_id, limit, TOKEN) {
+
+            let response = await fetch(
+              `https://api.spotify.com/v1/playlists/${playlist_id}?country=IN&limit=20`,
+              {
+                headers: {
+                  Authorization: `Bearer ${TOKEN}`,
+                  "Content-Type": "application/json",
+                },
+              }
+            );
+            let data = await response.json();
+            console.log(data);
+            dispatch({type:"detailsplaylist",payload:data})
+
+          
+
+          }
+
+          // search playlist
+
         //  track................................................
           async function getTrack(dispatch,playlistID, TOKEN) {
             let res = await fetch(
@@ -151,6 +175,13 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
             // return data.playlists.items;
           }
 
+          const setIsAuth =()=>{
+            dispatch({type:"auth",payload:true})
+          }
+          const setIsAuthFalse =()=>{
+            dispatch({type:"authfalse",payload:false})
+          }
+
 
 
 
@@ -159,7 +190,7 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==="playlist"){
 
-            getPlaylists(playlist_id,'14',TOKEN)
+            // getPlaylists(playlist_id,'14',TOKEN)
 
             getPlaylists('bollywood','18',TOKEN)
 
@@ -177,6 +208,15 @@ let client_secret= 'b2769937a71c40f099f495b6e0f978a5';
           }
           if(method==='album'){
             getAlbumTrack(TOKEN)
+          }
+          if(method==='detailsPlaylist'){
+            getDetailsPlaylists(playlist_id,null,TOKEN)
+          }
+          if(method =="auth"){
+            setIsAuth()
+          }
+          if(method =="authfalse"){
+            setIsAuthFalse()
           }
     }
     

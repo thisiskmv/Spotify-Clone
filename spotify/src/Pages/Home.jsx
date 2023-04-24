@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import Sidebar from "../Components/side";
 import {
   Box,
@@ -23,9 +24,10 @@ import GridMain from "./Grid";
 import { MyContext } from "../Components/context";
 import Player from "./Player";
 import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
+import {Link} from 'react-router-dom'
 
 const SpotifyHomepage = () => {
-  const Loggedin = true;
+  const Loggedin =  useSelector((store)=>store.isAuth);;
   const { myState, toggle } = useContext(MyContext);
 
   const handleOnChange = () => {
@@ -108,12 +110,14 @@ const SpotifyHomepage = () => {
               </Menu>
             ) : (
               <ButtonGroup spacing={2}>
-                <Button colorScheme="black" color="white" mr="2">
+                <Link to={'/signup'}><Button colorScheme="black" color="white" mr="2">
                   Sign Up
                 </Button>
-                <Button p={6} borderRadius="20px">
+                </Link>
+                <Link to="/login"><Button p={6} borderRadius="20px">
                   Log In
                 </Button>
+                </Link>
               </ButtonGroup>
             )}
           </Box>

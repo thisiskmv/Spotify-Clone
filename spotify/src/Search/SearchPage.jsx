@@ -33,7 +33,7 @@ import {
 } from "react-icons/md";
 import GridMain from "../Pages/Grid";
 import { useSelector } from "react-redux";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import Sidebar from "../Components/side";
 import Footermain from "../Pages/Footermain";
 import { FaSearch } from "react-icons/fa";
@@ -42,12 +42,26 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import store from "../Redux/store";
 import { FaPlay } from "react-icons/fa";
 import {MyContext} from '../Components/context'
+import { useDebounce } from "use-debounce";
+import thunkActionCreator from "../Redux/thunk";
+import {useDispatch} from 'react-redux'
+import AudioPlayer from "../Components/AudioPlayer";
+import SearchAudioPlayer from "../Components/SearchAudioPlayer";
 
-const SearchPage = ({ action, debounce }) => {
+const SearchPage = () => {
+  const [song, setSong] = useState([]);
+  const [trackIndex, setTrackIndex] = useState(0);
   const { myState, toggle } = useContext(MyContext);
   const [liked, setLike] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(null);
+  let dispatch =useDispatch();
+  let token =JSON.parse(localStorage.getItem("spotify_token"))
+
+  const[text,action] =useState("")
+
+  let [debouncedText] =useDebounce(text,1000);
+
   // const[data2,setData2]=useState(null)
   // store.subscribe(()=>{
   //   // setData2(store.getState().searchResults)
@@ -63,21 +77,24 @@ const SearchPage = ({ action, debounce }) => {
   });
 
   // const mana= data.splice(6, 1)  
-  console.log(data,"this is daata");
+  // console.log(data,"this is daata");
   let data2 = useSelector((store) => {
     return store.searchResults;
   });
-  // console.log(data2)
+  console.log("====>",data2)
   let data3 = useSelector((store) => {
     return store.getPlaylists;
   });
-  console.log(data3);
+  // console.log(data3);
   const { transcript, reset, listening } = useSpeechRecognition();
   // action(transcript)
 
   if (listening) {
+    // console.log("======>",transcript)
     timerId.current = setTimeout(() => {
       clearTimeout(timerId.current);
+      // SpeechRecognition.stopListening()
+      
       action(transcript);
       setSpeech(transcript);
     }, 2000);
@@ -85,15 +102,21 @@ const SearchPage = ({ action, debounce }) => {
   // console.log(speech,searchText);
   const handleMouseEnter = (value) => {
     setIsHovered(value);
-    console.log(value,"ohgafosdihf")
+    // console.log(value,"ohgafosdihf")
   };
 
   const handleMouseLeave = () => {
     setIsHovered();
-    console.log(isHovered,"hover value")
+    // console.log(isHovered,"hover value")
   };
 
-  console.log(data2,"from search page")
+  useEffect(()=>{
+    dispatch(
+      thunkActionCreator("searchResults", token.token, null, debouncedText)
+    );
+  },[debouncedText])
+
+  // console.log(data2,"from search page")
   return (
     <div style={{ background: "rgba(0, 0, 0, 0.900)" }}>
       <Sidebar />
@@ -149,7 +172,7 @@ const SearchPage = ({ action, debounce }) => {
         </Box>
       </Flex>
 
-      {debounce.length == 0 ? (
+      {debouncedText.length == 0 ? (
         <div
           style={{
             display: "grid",
@@ -223,10 +246,10 @@ const SearchPage = ({ action, debounce }) => {
                   <Image w="10rem" src={data2[0].album.images[1].url} />
                   <Heading mt="1rem">{data2[1].album.name}</Heading>
                   <Flex mt="0.5rem" color="#b3b3b3">
-                    <p>{data2[1].artists[0].name + ","}</p>
-                    <p style={{ margin: "0 0.2rem" }}>
+                    <p>{data2[1].artists[0].name}</p>
+                    {/* <p style={{ margin: "0 0.2rem" }}>
                       {data2[1].artists[1].name}
-                    </p>
+                    </p> */}
                     {/* <p>{data2[1].artists[2].name}</p> */}
                   </Flex>
                   <Flex justifyContent="right">
@@ -258,7 +281,7 @@ const SearchPage = ({ action, debounce }) => {
                   {data2.length > 0 &&
                     data2.map((e, id) => {
                       return (
-                        <Tr>
+                        <Tr onClick={()=>setTrackIndex(id)} >
                           <Td border={"0"}>
                             <Flex alignItems={"center"}>
                               <Image
@@ -361,7 +384,11 @@ const SearchPage = ({ action, debounce }) => {
       )}
 
       <Footermain />
+     {data2 && <SearchAudioPlayer items={data2} trackIndex={trackIndex} setTrackIndex={setTrackIndex} />}
+            {/* {console.log("=======data2=======>",data2)} */}
+    
     </div>
+    
   );
 };
 

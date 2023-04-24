@@ -35,11 +35,13 @@ import Footermain from "./Footermain";
 import { FaPlay } from "react-icons/fa";
 import { MyContext } from "../Components/context";
 import DynamicGrid from "./playlistgrid";
+import { useNavigate } from "react-router-dom";
 
 const GridMain = () => {
   const [isHovered, setIsHovered] = useState(null);
   const { myState, toggle } = useContext(MyContext);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  let navigate =useNavigate();
 
   // console.log("from grid",myState);
  
@@ -84,8 +86,8 @@ const GridMain = () => {
                   />
                 <Stack p={3} >
                 <Heading as='b' color='white' size='lg' mb={4}>Start listening with a free Spotify account</Heading>                
-                  <Button alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
-                  <Button w='90%' color='white' borderRadius={30} p={4}  variant='outline' >Log in</Button>           
+                  <Button onClick={()=>navigate('/login')} alignContent='center' w='90%' color='black' borderRadius={30} p={4} bg='#1ed760'>Sign up for free</Button>
+                  <Button onClick={()=>navigate('/signup')} w='90%' color='white' borderRadius={30} p={4}  variant='outline' >Log in</Button>           
  </Stack>
             </Flex>
           </ModalBody>
@@ -132,7 +134,7 @@ const GridMain = () => {
                     <Image
                       objectFit="cover"
                       maxW={{ base: "100%", sm: "200px" }}
-                      src="https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6"
+                      src="https://i.scdn.co/image/ab67706f000000030776a5b5a70f372747584c2b"
                       alt="hot hits"
                       borderRadius={10}
                     />
@@ -155,10 +157,10 @@ const GridMain = () => {
                 </Center>
 
                 <Text as="b" color="white">
-                  Peaceful Piano
+                Punjabi 101
                 </Text>
                 <Text color="grey" fontSize="sm">
-                  Relax and indulge with beautiful piano pieces
+                Ultimate 101 Punjabi Hits with Sidhu Moose Wala
                 </Text>
               </Stack>
             </GridItem>
@@ -183,7 +185,7 @@ const GridMain = () => {
                   <Image
                     objectFit="cover"
                     maxW={{ base: "100%", sm: "200px" }}
-                    src="https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+                    src="https://i.scdn.co/image/ab67706f000000036caf8c414e0b49f1b5be3e91"
                     alt="hot hits"
                     borderRadius={10}
                   />
@@ -205,10 +207,10 @@ const GridMain = () => {
                   </Box>
                 </Center>
                 <Text as="b" color="white">
-                  Deep Focus
+                Bollywood R&B
                 </Text>
                 <Text color="grey" fontSize="sm">
-                  Keep Calm and Focus with ambient and pos...
+                Hottest Bollywood R&B tunes!
                 </Text>
               </Stack>
             </GridItem>
