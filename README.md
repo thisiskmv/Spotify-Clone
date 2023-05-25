@@ -8,8 +8,7 @@ Simple Spotify UI Clone built using React + Chakra Ui + Spotify Web Api
 
 ## Demo
 
-
-https://spotify-two-virid.vercel.app/
+click here: https://spotify-two-virid.vercel.app/
 ## Tech Stack
 
 **Client:** React, Redux, Chakra-Ui
